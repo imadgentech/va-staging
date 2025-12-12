@@ -1,110 +1,106 @@
-import json
-import os
-import threading
+import logging
+from datetime import datetime
+from src.core.airtable_client import AirtableManager
 
-LOCK = threading.Lock()
-FILE_PATH = "pending_reservations.json"
+logger = logging.getLogger("PendingSaver")
 
-
-# ----------------------------------------------------
-# INTERNAL HELPERS
-# ----------------------------------------------------
-
-def _ensure_file_exists():
-    """Create empty JSON array file if missing."""
-    if not os.path.exists(FILE_PATH):
-        try:
-            with open(FILE_PATH, "w", encoding="utf-8") as f:
-                json.dump([], f, indent=2)
-        except Exception:
-            pass
-
-
-def _load_all():
-    """Load existing pending reservations with corruption handling."""
-    _ensure_file_exists()
-
-    try:
-        with open(FILE_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            if isinstance(data, list):
-                return data
-            return []
-    except Exception:
-        # If corrupted → reset file
-        with open(FILE_PATH, "w", encoding="utf-8") as f:
-            json.dump([], f)
-        return []
-
-
-def _save_all(data):
-    """Atomic write to prevent corruption."""
-    temp_path = FILE_PATH + ".tmp"
-
-    with open(temp_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-
-    os.replace(temp_path, FILE_PATH)
+# Initialize Airtable once
+airtable = AirtableManager()
 
 
 # ----------------------------------------------------
-# RESERVATION QUEUE FUNCTIONS
+# VALIDATION
 # ----------------------------------------------------
 
 def _validate_reservation(res: dict) -> bool:
-    """
-    Ensure the JSON structure is correct before saving.
-    restaurant_id is optional.
-    """
-    required_keys = ["guest_name", "guest_phone", "date", "time", "guests", "special_requests"]
+    required_keys = [
+        "guest_name",
+        "guest_phone",
+        "date",
+        "time",
+        "guests",
+        "special_requests",
+    ]
 
     for k in required_keys:
         if k not in res:
+            logger.warning(f"⚠️ Missing required field: {k}")
             return False
 
     return True
 
 
-def add_pending_reservation(cleaned_reservation: dict):
-    """
-    Add a normalized reservation to the queue.
-    Supports optional:
-        - restaurant_id
-    """
-    with LOCK:
-        if not _validate_reservation(cleaned_reservation):
-            return False
+# ----------------------------------------------------
+# PUBLIC API (USED BY SERVER + AGENTS)
+# ----------------------------------------------------
 
-        data = _load_all()
-        data.append(cleaned_reservation)
-        _save_all(data)
+def add_pending_reservation(cleaned_reservation: dict) -> bool:
+    """
+    Save a pending reservation directly to Airtable.
+    """
+    if not _validate_reservation(cleaned_reservation):
+        return False
+
+    try:
+        record = {
+            "restaurant_id": cleaned_reservation.get("restaurant_id"),
+            "guest_name": cleaned_reservation.get("guest_name"),
+            "guest_phone": cleaned_reservation.get("guest_phone"),
+            "date": cleaned_reservation.get("date"),
+            "time": cleaned_reservation.get("time"),
+            "guests": cleaned_reservation.get("guests"),
+            "special_requests": cleaned_reservation.get("special_requests", ""),
+            "source": "vapi",
+            "status": "pending",
+        }
+
+        airtable.create_pending_reservation(record)
+
+        logger.info("✅ Pending reservation saved to Airtable")
         return True
+
+    except Exception as e:
+        logger.exception("❌ Failed to save pending reservation to Airtable")
+        return False
 
 
 def get_pending_reservations():
-    """Return all pending reservations."""
-    with LOCK:
-        return _load_all()
+    """
+    Fetch all pending reservations from Airtable.
+    (Optional — used by micro-agents if needed)
+    """
+    try:
+        return airtable.get_pending_reservations()
+    except Exception:
+        logger.exception("❌ Failed to fetch pending reservations")
+        return []
 
 
 def pop_next_reservation():
     """
-    Remove and return the next reservation for saving.
-    Returns None if queue is empty.
+    Fetch + delete the oldest pending reservation.
     """
-    with LOCK:
-        data = _load_all()
+    try:
+        record = airtable.get_oldest_pending_reservation()
 
-        if not data:
+        if not record:
             return None
 
-        next_item = data.pop(0)
-        _save_all(data)
-        return next_item
+        airtable.delete_pending_reservation(record["id"])
+        return record["fields"]
+
+    except Exception:
+        logger.exception("❌ Failed to pop pending reservation")
+        return None
 
 
 def clear_all():
-    """Delete all pending reservations."""
-    with LOCK:
-        _save_all([])
+    """
+    Clear all pending reservations.
+    """
+    try:
+        airtable.clear_pending_reservations()
         return True
+    except Exception:
+        logger.exception("❌ Failed to clear pending reservations")
+        return False
