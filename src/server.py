@@ -85,6 +85,9 @@ def resolve_restaurant_and_prompt(dialed_number: str):
 def health_check():
     return {"status": "online", "service": "Vapi Orchestrator"}
 
+@app.get("/inbound")
+def inbound_health():
+    return {"status": "ready", "message": "POST call events here"}
 
 # ---------------------------------------------------------
 # MAIN WEBHOOK
