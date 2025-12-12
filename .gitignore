@@ -1,0 +1,8 @@
+.env
+venv/
+__pycache__/
+*.pyc
+server.log
+last_vapi_request.json
+pending_reservations.json
+ngrok.exe
