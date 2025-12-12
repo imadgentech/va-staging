@@ -208,7 +208,9 @@ async def vapi_webhook(request: Request):
         }
 
     logger.info(f"ℹ️ Ignoring message type: {msg_type}")
-    return {}
+    return {
+        "status": "ok"
+    }
 
 
 # ---------------------------------------------------------
