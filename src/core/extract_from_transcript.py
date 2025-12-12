@@ -1,104 +1,104 @@
 import re
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 logger = logging.getLogger("TranscriptExtractor")
-
 
 # ----------------------------------------------------
 # BASIC CLEANERS
 # ----------------------------------------------------
 
 def clean_text(val):
-    if not val:
-        return ""
-    return str(val).strip()
+    return str(val).strip() if val else ""
 
 
 def clean_phone(s):
     if not s:
         return ""
-
-    # extract digits, remove spaces & symbols
     digits = re.sub(r"[^\d]", "", s)
+    return digits if 7 <= len(digits) <= 15 else ""
 
-    # accept 7–15 digits
-    if 7 <= len(digits) <= 15:
-        return digits
 
+# ----------------------------------------------------
+# DATE HANDLING (STRICT & SAFE)
+# ----------------------------------------------------
+
+def clean_date(raw: str):
+    """
+    Convert natural language date → YYYY-MM-DD
+
+    Supported:
+    - today
+    - tomorrow
+    - day after tomorrow
+    - in N days
+    - after N days
+    - 25 Dec 2025
+    - 1/2/2025
+    """
+
+    if not raw:
+        return ""
+
+    raw = raw.lower().strip()
+    today = datetime.now().date()
+
+    # --- Relative days ---
+    if raw == "today":
+        return today.isoformat()
+
+    if raw == "tomorrow":
+        return (today + timedelta(days=1)).isoformat()
+
+    if "day after tomorrow" in raw:
+        return (today + timedelta(days=2)).isoformat()
+
+    match = re.search(r"(in|after)\s+(\d+)\s+days?", raw)
+    if match:
+        days = int(match.group(2))
+        return (today + timedelta(days=days)).isoformat()
+
+    # --- Absolute formats ---
+    for fmt in ("%d/%m/%Y", "%d-%m-%Y", "%d %b %Y", "%d %B %Y"):
+        try:
+            return datetime.strptime(raw, fmt).date().isoformat()
+        except ValueError:
+            pass
+
+    # ❌ Anything else is unsafe
+    logger.warning(f"Invalid date phrase ignored: {raw}")
     return ""
 
 
-def clean_date(s):
-    """
-    Convert natural language date → YYYY-MM-DD
-    Allowed formats:
-        - 25 Dec 2025
-        - Dec 25
-        - tomorrow
-        - today
-        - 1/2/2025
-    """
-    if not s:
-        return ""
-
-    s = s.lower().strip()
-
-    today = datetime.now()
-
-    if "today" in s:
-        return today.strftime("%Y-%m-%d")
-
-    if "tomorrow" in s:
-        return (today.replace(day=today.day + 1)).strftime("%Y-%m-%d")
-
-    # numeric formats
-    for fmt in ["%d/%m/%Y", "%d-%m-%Y", "%d %b %Y", "%d %B %Y"]:
-        try:
-            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
-        except:
-            pass
-
-    return s
-
+# ----------------------------------------------------
+# TIME
+# ----------------------------------------------------
 
 def clean_time(s):
-    """
-    Convert natural language time → HH:MM (7pm → 19:00)
-    """
     if not s:
         return ""
 
     s = s.lower().replace(" ", "").replace(".", "")
-
     match = re.match(r"^(\d{1,2})(:?(\d{2}))?(am|pm)?$", s)
+
     if match:
         hour = int(match.group(1))
-        minute = int(match.group(3)) if match.group(3) else 0
+        minute = int(match.group(3) or 0)
         ampm = match.group(4)
 
         if ampm == "pm" and hour != 12:
             hour += 12
-        elif ampm == "am" and hour == 12:
+        if ampm == "am" and hour == 12:
             hour = 0
 
         return f"{hour:02d}:{minute:02d}"
 
-    if re.match(r"^\d{2}:\d{2}$", s):
-        return s
-
-    return s
+    return ""
 
 
-def extract_guests(s):
-    if not s:
-        return 2
-
-    match = re.search(r"\b(\d{1,2})\b", s)
-    if match:
-        return int(match.group(1))
-
-    return 2
+def extract_guests(text):
+    match = re.search(r"\b(\d{1,2})\s*(people|guests|persons)?\b", text)
+    return int(match.group(1)) if match else 2
 
 
 # ----------------------------------------------------
@@ -106,11 +106,6 @@ def extract_guests(s):
 # ----------------------------------------------------
 
 def extract_reservation(transcript_text: str, restaurant_id: str = None):
-    """
-    Extract guest_name, phone, date, time, guests, special_requests
-    from full transcript text.
-    """
-
     result = {
         "restaurant_id": restaurant_id,
         "guest_name": "",
@@ -123,69 +118,48 @@ def extract_reservation(transcript_text: str, restaurant_id: str = None):
 
     text = transcript_text.lower()
 
-    # ----------------------------
     # NAME
-    # ----------------------------
     name_match = re.search(r"(my name is|this is|i am)\s+([a-zA-Z ]+)", text)
     if name_match:
         result["guest_name"] = clean_text(name_match.group(2))
 
-    # ----------------------------
     # PHONE
-    # ----------------------------
     phone_match = re.search(r"(\+?\d[\d \-]{6,})", text)
     if phone_match:
         result["guest_phone"] = clean_phone(phone_match.group(1))
 
-    # ----------------------------
-    # DATE
-    # ----------------------------
+    # DATE (STRICT)
     date_match = re.search(
-        r"\b(?:for|on)\s+(today|tomorrow|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|\d{1,2}\s+[a-zA-Z]+)",
-        text)
+        r"(today|tomorrow|day after tomorrow|in \d+ days|after \d+ days|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|\d{1,2}\s+[a-zA-Z]+)",
+        text
+    )
     if date_match:
         result["date"] = clean_date(date_match.group(1))
 
-    # ----------------------------
     # TIME
-    # ----------------------------
-    time_match = re.search(r"\b(\d{1,2}(:?\d{2})?\s*(am|pm)?)\b", text)
+    time_match = re.search(r"\b(\d{1,2}(:\d{2})?\s*(am|pm)?)\b", text)
     if time_match:
         result["time"] = clean_time(time_match.group(1))
 
-    # ----------------------------
     # GUESTS
-    # ----------------------------
-    guests_match = re.search(r"(?:for|we are|people|guests)\s+(\d{1,2})", text)
-    if guests_match:
-        result["guests"] = int(guests_match.group(1))
+    result["guests"] = extract_guests(text)
 
-    # ----------------------------
     # SPECIAL REQUESTS
-    # ----------------------------
     special_match = re.search(
-        r"(birthday|anniversary|vegan|allergic|gluten|no special requests|nothing special)",
-        text,
+        r"(birthday|anniversary|vegan|allergic|gluten|nothing special|no special requests)",
+        text
     )
-    if special_match:
-        val = special_match.group(1)
-        if "no" in val:
-            result["special_requests"] = ""
-        else:
-            result["special_requests"] = val
+    if special_match and "no" not in special_match.group(1):
+        result["special_requests"] = special_match.group(1)
 
     return result
 
 
 # ----------------------------------------------------
-# COMPATIBILITY WRAPPER (Fixes your ImportError)
+# COMPATIBILITY WRAPPER
 # ----------------------------------------------------
 
 def extract_reservation_from_transcript(transcript_text: str, restaurant_id: str = None):
-    """
-    Wrapper for older imports.
-    Your server expects this function name.
-    """
     return extract_reservation(transcript_text, restaurant_id)
 
 
