@@ -154,3 +154,38 @@ class AirtableManager:
 
     def get_all_restaurants(self):
         return self.restaurants.all() if self.restaurants else []
+
+    def get_restaurant_by_id(self, restaurant_id: str):
+        """
+        restaurant_id here = your numeric/text restaurant_id column in Airtable (like 3)
+        NOT the Airtable record id (recXXXX).
+        """
+        if not self.restaurants or not restaurant_id:
+            return None
+        try:
+            formula = match({"restaurant_id": str(restaurant_id)})
+            records = self.restaurants.all(formula=formula, max_records=1)
+            return records[0] if records else None
+        except Exception as e:
+            logger.error(f"❌ get_restaurant_by_id failed: {e}")
+            return None
+
+    def get_call_logs_by_restaurant(self, restaurant_id: str):
+        if not self.logs or not restaurant_id:
+            return []
+        try:
+            formula = match({"restaurant_id": str(restaurant_id)})
+            return self.logs.all(formula=formula)
+        except Exception as e:
+            logger.error(f"❌ get_call_logs_by_restaurant failed: {e}")
+            return []
+
+    def get_reservations_by_restaurant(self, restaurant_id: str):
+        if not self.reservations or not restaurant_id:
+            return []
+        try:
+            formula = match({"restaurant_id": str(restaurant_id)})
+            return self.reservations.all(formula=formula)
+        except Exception as e:
+            logger.error(f"❌ get_reservations_by_restaurant failed: {e}")
+            return []
