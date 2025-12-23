@@ -9,3 +9,4 @@ watchdog
 dash
 dash-bootstrap-components
 plotly
+python-jose
