@@ -47,40 +47,30 @@ except Exception as e:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 def send_otp_email(to_email: str, otp: str):
-    smtp_host = "smtp.gmail.com"
-    smtp_port = 587
-
-    smtp_user = os.getenv("SMTP_EMAIL")
-    smtp_pass = os.getenv("SMTP_PASSWORD")
-
-    if not smtp_user or not smtp_pass:
-        raise Exception("SMTP credentials missing")
-
-    body = f"""
-Your Imadgen login code is:
-
-{otp}
-
-This code is valid for 5 minutes.
-If you did not request this, please ignore this email.
-"""
-
-    msg = MIMEText(body)
-    msg["Subject"] = "Your Imadgen Login Code"
-    msg["From"] = smtp_user
-    msg["To"] = to_email
-
-    server = smtplib.SMTP(smtp_host, smtp_port)
-    server.starttls()
-    server.login(smtp_user, smtp_pass)
-    server.send_message(msg)
-    server.quit()
+    res = requests.post(
+        "https://api.resend.com/emails",
+        headers={
+            "Authorization": f"Bearer {os.getenv('RESEND_API_KEY')}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "from": "Imadgen <no-reply@imadgen.ai>",
+            "to": [to_email],
+            "subject": "Your Imadgen Login Code",
+            "html": f"""
+                <p>Your login code is:</p>
+                <h2>{otp}</h2>
+                <p>Valid for 5 minutes.</p>
+            """
+        }
+    )
+    res.raise_for_status()
 
 def create_access_token(data: dict):
     return jwt.encode(data, JWT_SECRET, algorithm=JWT_ALGO)
