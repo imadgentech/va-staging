@@ -22,8 +22,7 @@ from backend.core.extract_from_transcript import extract_reservation_from_transc
 from fastapi.middleware.cors import CORSMiddleware
 import random
 import time
-import smtplib
-from email.mime.text import MIMEText
+import requests
 # ---------------- OTP STORE (email -> {otp, expires_at}) ----------------
 OTP_STORE = {}
 OTP_EXPIRY_SECONDS = 300  # 5 minutes
