@@ -59,7 +59,7 @@ def send_otp_email(to_email: str, otp: str):
             "Content-Type": "application/json",
         },
         json={
-            "from": "Imadgen <no-reply@imadgen.ai>",
+            "from": "Imadgen <onboarding@resend.dev>",
             "to": [to_email],
             "subject": "Your Imadgen Login Code",
             "html": f"""
