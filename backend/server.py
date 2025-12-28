@@ -81,11 +81,12 @@ def send_otp_email(to_email: str, otp: str):
     msg.attach(MIMEText(html, "html"))
 
     try:
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
-            server.starttls()
+        # Use SMTP_SSL on port 465 (stateless SSL) instead of STARTTLS
+        # This fixes common 'Network is unreachable' issues on some cloud providers
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(sender_email, sender_password)
             server.send_message(msg)
-            logger.info(f"✅ OTP email sent to {to_email} via Gmail")
+            logger.info(f"✅ OTP email sent to {to_email} via Gmail (SSL)")
     except Exception as e:
         logger.error(f"❌ Gmail Send Error: {e}")
         raise ValueError("Failed to send email via Gmail")
