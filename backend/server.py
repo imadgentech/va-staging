@@ -195,19 +195,39 @@ async def vapi_webhook(request: Request):
         recording_url = message.get("recordingUrl") or message.get("stereoRecordingUrl") or ""
         summary = message.get("analysis", {}).get("summary") or "No summary available."
         
-        # Simple Intent Classification
-        intent = "General Inquiry"
+        # Custom Intent Classification (Aligned with Airtable)
+        intent = "Other"
         lower_trans = transcript.lower()
+
+        # 1. Reservation Logic
         if extracted.get("guest_name"):
-            intent = "New Reservation"
+            intent = "New reservation"
         elif "cancel" in lower_trans:
-            intent = "Cancellation"
+            intent = "Cancel reservation"
         elif "change" in lower_trans or "reschedule" in lower_trans:
-            intent = "Modification"
-        elif "menu" in lower_trans or "food" in lower_trans:
-            intent = "Menu Inquiry"
-        elif "hours" in lower_trans or "open" in lower_trans:
-            intent = "Hours Inquiry"
+            intent = "Modify reservation"
+        
+        # 2. Restaurant/Menu
+        elif "menu" in lower_trans or "food" in lower_trans or "diet" in lower_trans:
+            intent = "Menu question"
+
+        # 3. Hotel Services
+        elif "room" in lower_trans and "book" in lower_trans:
+            intent = "Room reservation"
+        elif "clean" in lower_trans or "towel" in lower_trans or "housekeeping" in lower_trans:
+            intent = "Housekeeping"
+        elif "laundry" in lower_trans or "clothes" in lower_trans or "wash" in lower_trans:
+            intent = "Laundry"
+        elif "room service" in lower_trans or "in-room dining" in lower_trans:
+            intent = "In-room dining"
+        elif "spa" in lower_trans or "massage" in lower_trans:
+            intent = "Spa booking"
+        elif "airport" in lower_trans or "shuttle" in lower_trans or "taxi" in lower_trans:
+            intent = "Airport pickup"
+        elif "broken" in lower_trans or "fix" in lower_trans or "maintenance" in lower_trans:
+            intent = "Maintenance"
+        elif "manager" in lower_trans or "complain" in lower_trans or "angry" in lower_trans:
+            intent = "Complaint"
 
         # Log to Airtable
         if restaurant_id and airtable:
