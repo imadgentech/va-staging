@@ -51,8 +51,20 @@ class UsersAirtable:
         if not self.table:
             return None
 
-        records = self.table.all(formula=f"{{email}} = '{email}'", max_records=1)
-        return records[0] if records else None
+        formula = f"LOWER({{email}}) = '{email.lower()}'"
+        # Fetch ALL matches to handle duplicates
+        records = self.table.all(formula=formula) 
+        
+        if not records:
+            return None
+
+        # Prioritize the record that HAS a password
+        for r in records:
+            if r.get("fields", {}).get("password"):
+                return r
+        
+        # Fallback to the last one (most recent usually)
+        return records[-1]
 
     def get_restaurant_id_for_email(self, email: str):
         user = self.get_user_by_email(email)
