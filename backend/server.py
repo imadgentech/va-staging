@@ -51,25 +51,44 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ---------------------------------------------------------
+# EMAIL (Gmail SMTP)
+# ---------------------------------------------------------
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 def send_otp_email(to_email: str, otp: str):
-    res = requests.post(
-        "https://api.resend.com/emails",
-        headers={
-            "Authorization": f"Bearer {os.getenv('RESEND_API_KEY')}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "from": "Imadgen <onboarding@resend.dev>",
-            "to": [to_email],
-            "subject": "Your Imadgen Login Code",
-            "html": f"""
-                <p>Your login code is:</p>
-                <h2>{otp}</h2>
-                <p>Valid for 5 minutes.</p>
-            """
-        }
-    )
-    res.raise_for_status()
+    sender_email = os.getenv("EMAIL_USER", "").strip()
+    sender_password = os.getenv("EMAIL_PASSWORD", "").strip()
+
+    if not sender_email or not sender_password:
+        logger.error("❌ Missing Gmail credentials (EMAIL_USER/EMAIL_PASSWORD)")
+        raise ValueError("Server email not configured")
+
+    msg = MIMEMultipart()
+    msg["From"] = f"Imadgen Team <{sender_email}>"
+    msg["To"] = to_email
+    msg["Subject"] = "Your Imadgen Login Code"
+
+    html = f"""
+    <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h2>Login Code</h2>
+        <p>Your code is: <b style="font-size: 24px;">{otp}</b></p>
+        <p>Valid for 5 minutes.</p>
+    </div>
+    """
+    msg.attach(MIMEText(html, "html"))
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.send_message(msg)
+            logger.info(f"✅ OTP email sent to {to_email} via Gmail")
+    except Exception as e:
+        logger.error(f"❌ Gmail Send Error: {e}")
+        raise ValueError("Failed to send email via Gmail")
 
 def create_access_token(data: dict):
     return jwt.encode(data, JWT_SECRET, algorithm=JWT_ALGO)
