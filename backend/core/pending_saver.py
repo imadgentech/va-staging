@@ -56,6 +56,18 @@ def add_pending_reservation(cleaned_reservation: dict) -> bool:
 
         airtable.create_pending_reservation(record)
 
+        # ----------------------------------------------------
+        # 🟢 AUTO-CONFIRM (Dual Write)
+        # The user requested that data "transfer" to Reservations.
+        # Since we don't have a manual review step, we write to BOTH.
+        # ----------------------------------------------------
+        if _validate_reservation(cleaned_reservation):
+            airtable.create_reservation(
+                cleaned_reservation.get("restaurant_id"),
+                cleaned_reservation
+            )
+            logger.info("✅ Reservation auto-confirmed and saved to main table")
+
         logger.info("✅ Pending reservation saved to Airtable")
         return True
 

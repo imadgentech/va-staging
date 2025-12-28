@@ -97,9 +97,14 @@ def clean_time(s):
 
 
 def extract_guests(text):
-    match = re.search(r"\b(\d{1,2})\s*(people|guests|persons)?\b", text)
-    return int(match.group(1)) if match else 2
+    # Strict: requires "guests", "people", "party of", etc.
+    # Matches: "6 guests", "party of 6", "6 people"
+    match = re.search(r"\b(\d{1,2})\s*(people|guests|persons|pax)\b", text)
+    if not match:
+        # Try "party of X"
+        match = re.search(r"\bparty of\s*(\d{1,2})\b", text)
 
+    return int(match.group(1)) if match else 2
 
 # ----------------------------------------------------
 # MASTER EXTRACTION FUNCTION
@@ -136,10 +141,11 @@ def extract_reservation(transcript_text: str, restaurant_id: str = None):
     if date_match:
         result["date"] = clean_date(date_match.group(1))
 
-    # TIME
-    time_match = re.search(r"\b(\d{1,2}(:\d{2})?\s*(am|pm)?)\b", text)
+    # TIME - STRICTER: Needs AM/PM or :MM
+    # preventing "20" from "20th" matching as 8pm
+    time_match = re.search(r"\b(\d{1,2}:\d{2}\s*(am|pm)?|\d{1,2}\s*(am|pm))\b", text)
     if time_match:
-        result["time"] = clean_time(time_match.group(1))
+        result["time"] = clean_time(time_match.group(0))
 
     # GUESTS
     result["guests"] = extract_guests(text)
