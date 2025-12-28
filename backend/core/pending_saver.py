@@ -42,7 +42,8 @@ def add_pending_reservation(cleaned_reservation: dict) -> bool:
         return False
 
     try:
-        record = {
+        # Prepare record, filtering out None or empty strings to satisfy Airtable validation
+        raw_record = {
             "restaurant_id": cleaned_reservation.get("restaurant_id"),
             "guest_name": cleaned_reservation.get("guest_name"),
             "guest_phone": cleaned_reservation.get("guest_phone"),
@@ -53,6 +54,10 @@ def add_pending_reservation(cleaned_reservation: dict) -> bool:
             "source": "vapi",
             "status": "pending",
         }
+        # Only keep keys with truthy values (or explicitly 0/False if needed, though mostly strings here)
+        # Note: 'guests' is int, so we should keep it even if 0 if that were possible, but it's usually >0.
+        # Ideally, we just remove keys that are empty strings if they are meant to be dates/selects.
+        record = {k: v for k, v in raw_record.items() if v not in [None, ""]}
 
         airtable.create_pending_reservation(record)
 
@@ -62,9 +67,19 @@ def add_pending_reservation(cleaned_reservation: dict) -> bool:
         # Since we don't have a manual review step, we write to BOTH.
         # ----------------------------------------------------
         if _validate_reservation(cleaned_reservation):
+            # Use the SAME filtered record (minus status, which create_reservation sets to 'Confirmed' anyway)
+            # Actually create_reservation builds its own dict, so we must be careful.
+            # Let's pass the cleaned_reservation but we know create_reservation in airtable_client
+            # might not filter empty strings.
+            # Ideally, we should update airtable_client to filter, OR pass a filtered dict here.
+
+            # HACK: airtable_client.create_reservation REBUILDS the dict from input.
+            # We should pass the FILTERED 'record' to it, and ensure airtable_client uses get() safely.
+            # But 'record' has keys like 'restaurant_id', 'guest_name' etc. which matches what create_reservation expects.
+            
             airtable.create_reservation(
-                cleaned_reservation.get("restaurant_id"),
-                cleaned_reservation
+                record.get("restaurant_id"),
+                record # Pass the CLEANED dict
             )
             logger.info("✅ Reservation auto-confirmed and saved to main table")
 

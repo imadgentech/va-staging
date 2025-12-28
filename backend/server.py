@@ -87,11 +87,14 @@ def send_otp_email(to_email: str, otp: str):
         gmail_ip = socket.gethostbyname(gmail_host)
         logger.info(f"🔍 Resolved {gmail_host} to {gmail_ip}")
 
-        with smtplib.SMTP_SSL(gmail_ip, 465) as server:
-            server.ehlo(gmail_host) # SNI: Say hello as the domain, not the IP
+        # Use standard submission port 587 with STARTTLS + Explicit IPv4
+        with smtplib.SMTP(gmail_ip, 587) as server:
+            server.ehlo(gmail_host) # SNI
+            server.starttls()       # Upgrade connection
+            server.ehlo(gmail_host) # Re-identify after TLS
             server.login(sender_email, sender_password)
             server.send_message(msg)
-            logger.info(f"✅ OTP email sent to {to_email} via Gmail (SSL)")
+            logger.info(f"✅ OTP email sent to {to_email} via Gmail (STARTTLS)")
     except Exception as e:
         logger.error(f"❌ Gmail Send Error: {e}")
         raise ValueError("Failed to send email via Gmail")
@@ -256,8 +259,20 @@ async def vapi_webhook(request: Request):
 
         # Log to Airtable
         if restaurant_id and airtable:
+            # Note: Do NOT send 'restaurant_id' if it's a computed field in Airtable.
+            # Usually, you link via a Linked Record field (e.g. 'Restaurant Link').
+            # If 'restaurant_id' is computed based on that link, we just send the link.
+            # Assuming 'restaurant_link' or we just send the restaurant_id as a separate field if it's NOT computed.
+            # The error said "Field 'restaurant_id' ... is computed".
+            # So we will OMIT it from the payload. We rely on Airtable to compute it if we link the record?
+            # actually, usually we need to set the Link field.
+            # Let's try to just log the other details for now to unblock.
+            
+            # If we want to link it, we'd need the field name typically used for linking (e.g. "Restaurant").
+            # For now, let's remove 'restaurant_id' from the write payload to fix the 422 error.
+            
             airtable.log_call({
-                "restaurant_id": restaurant_id,
+                # "restaurant_id": restaurant_id,  <-- REMOVED per error message
                 "call_id": message.get("call", {}).get("id") or "unknown",
                 "caller_number": dialed_number,
                 "intent": intent,

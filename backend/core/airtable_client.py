@@ -77,7 +77,7 @@ class AirtableManager:
             return False
 
         try:
-            record = {
+            raw_record = {
                 **({"restaurant": [restaurant_id]} if restaurant_id else {}),
                 "guest_name": data.get("guest_name"),
                 "guest_phone": data.get("guest_phone", ""),
@@ -87,6 +87,8 @@ class AirtableManager:
                 "special_requests": data.get("special_requests", ""),
                 "status": "Confirmed",
             }
+            # Robust filter for empty dates etc
+            record = {k: v for k, v in raw_record.items() if v not in [None, ""]}
 
             self.reservations.create(record)
             return True
