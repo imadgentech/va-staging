@@ -229,6 +229,11 @@ async def vapi_webhook(request: Request):
                     "temperature": 0.5,
                     "systemPrompt": system_prompt,
                 },
+                "transcriber": {
+                    "provider": "deepgram",
+                    "model": "nova-2",
+                    "language": "en-US"
+                },
             },
             "tools": [
                 {
@@ -252,7 +257,12 @@ async def vapi_webhook(request: Request):
                 }
             ],
             "toolChoice": "auto",
-            "turnDetection": {"type": "serverVad"},
+            "turnDetection": {
+                "type": "serverVad",
+                "threshold": 0.8,
+                "prefixPaddingMs": 300,
+                "silenceDurationMs": 1000
+            },
         }
 
     logger.info(f"ℹ️ Ignoring message type: {msg_type}")
