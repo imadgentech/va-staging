@@ -315,14 +315,22 @@ async def vapi_webhook(request: Request):
 
         logger.info(f"✅ Routing call to: {name}")
 
+        # 🎯 STABILITY TWEAKS (User Request)
+        # 1. Calm, slow, short sentences
+        system_prompt += "\n\nSTYLE GUIDE: Speak like a calm radio host. Speak SLOWLY and CLEARLY. Keep responses SHORT (under 2 sentences). Avoid long explanations."
+        
         return {
             "assistant": {
                 "firstMessage": f"Hi, thanks for calling {name}. How can I help you?",
-                "voice": {"provider": "vapi", "voiceId": "Paige"},
+                "voice": {
+                    "provider": "vapi", 
+                    "voiceId": "Paige",
+                    # Some providers support speed/stability here, but prompt is safest universal fix.
+                },
                 "model": {
                     "provider": "openai",
                     "model": "gpt-4o-mini",
-                    "temperature": 0.5,
+                    "temperature": 0.3, # Lower temp for more stable/predictable responses
                     "systemPrompt": system_prompt,
                 },
                 "transcriber": {
@@ -355,9 +363,9 @@ async def vapi_webhook(request: Request):
             "toolChoice": "auto",
             "turnDetection": {
                 "type": "serverVad",
-                "threshold": 0.8,
+                "threshold": 0.9,       # High threshold = harder to interrupt (less sensitive)
                 "prefixPaddingMs": 300,
-                "silenceDurationMs": 1000
+                "silenceDurationMs": 1500 # Wait 1.5s silence before taking turn (reduces cutting off)
             },
         }
 
