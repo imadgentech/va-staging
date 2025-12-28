@@ -33,6 +33,7 @@ class UsersAirtable:
             "occupation": data["occupation"],
             "email": data["email"],
             "phone": data["phone"],
+            "password": data.get("password", ""), # Save the hashed password
             "status": "pending",
         }
 
