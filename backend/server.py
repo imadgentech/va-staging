@@ -80,10 +80,15 @@ def send_otp_email(to_email: str, otp: str):
     """
     msg.attach(MIMEText(html, "html"))
 
+    import socket
     try:
-        # Use SMTP_SSL on port 465 (stateless SSL) instead of STARTTLS
-        # This fixes common 'Network is unreachable' issues on some cloud providers
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        # Force IPv4 resolution to fix 'Network is unreachable' (IPv6 issue)
+        gmail_host = "smtp.gmail.com"
+        gmail_ip = socket.gethostbyname(gmail_host)
+        logger.info(f"🔍 Resolved {gmail_host} to {gmail_ip}")
+
+        with smtplib.SMTP_SSL(gmail_ip, 465) as server:
+            server.ehlo(gmail_host) # SNI: Say hello as the domain, not the IP
             server.login(sender_email, sender_password)
             server.send_message(msg)
             logger.info(f"✅ OTP email sent to {to_email} via Gmail (SSL)")
