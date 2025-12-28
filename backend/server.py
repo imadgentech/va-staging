@@ -185,8 +185,44 @@ async def vapi_webhook(request: Request):
 
         logger.info(f"📌 Extracted reservation: {extracted}")
 
-        # Save to pending queue
+        # Save to pending queue (and auto-confirm)
         add_pending_reservation(extracted)
+
+        # ---------------------------------------------------------
+        # 📝 LOG CALL + INTENT
+        # ---------------------------------------------------------
+        
+        recording_url = message.get("recordingUrl") or message.get("stereoRecordingUrl") or ""
+        summary = message.get("analysis", {}).get("summary") or "No summary available."
+        
+        # Simple Intent Classification
+        intent = "General Inquiry"
+        lower_trans = transcript.lower()
+        if extracted.get("guest_name"):
+            intent = "New Reservation"
+        elif "cancel" in lower_trans:
+            intent = "Cancellation"
+        elif "change" in lower_trans or "reschedule" in lower_trans:
+            intent = "Modification"
+        elif "menu" in lower_trans or "food" in lower_trans:
+            intent = "Menu Inquiry"
+        elif "hours" in lower_trans or "open" in lower_trans:
+            intent = "Hours Inquiry"
+
+        # Log to Airtable
+        if restaurant_id and airtable:
+            airtable.log_call({
+                "restaurant_id": restaurant_id,
+                "call_id": message.get("call", {}).get("id") or "unknown",
+                "caller_number": dialed_number,
+                "intent": intent,
+                "outcome": "completed",
+                "agent_summary": summary,
+                "recording_url": recording_url,
+                "transcript": transcript,
+                "timestamp": datetime.now().isoformat()
+            })
+            logger.info("✅ Call log saved to Airtable")
 
         logger.info("💾 Reservation saved from transcript")
         return {}
