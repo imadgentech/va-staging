@@ -1,0 +1,1244 @@
+{
+  "message": {
+    "timestamp": 1765517746442,
+    "type": "end-of-call-report",
+    "analysis": {
+      "summary": "The user called Blue Wave Ramen Bar to make a reservation for tomorrow, December 13th, at 6 PM. They requested a table for four under the name Sid, which the AI successfully confirmed.",
+      "successEvaluation": "true"
+    },
+    "artifact": {
+      "messages": [
+        {
+          "role": "bot",
+          "message": "Hi. Thanks for calling Blue Wave Ramen Bar. How can I help you?",
+          "time": 1765517695343,
+          "endTime": 1765517698183,
+          "secondsFromStart": 1.6,
+          "duration": 2840,
+          "source": ""
+        },
+        {
+          "role": "user",
+          "message": "Hi. I wanna make a reservation for tomorrow.",
+          "time": 1765517699203,
+          "endTime": 1765517701543,
+          "secondsFromStart": 5.46,
+          "duration": 2340,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "hi",
+                "start": 5.46,
+                "end": 5.7,
+                "confidence": 0.9765625,
+                "punctuated_word": "Hi."
+              },
+              {
+                "word": "i",
+                "start": 5.7,
+                "end": 5.7799997,
+                "confidence": 1,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "wanna",
+                "start": 5.7799997,
+                "end": 6.1,
+                "confidence": 0.98828125,
+                "punctuated_word": "wanna"
+              },
+              {
+                "word": "make",
+                "start": 6.1,
+                "end": 6.34,
+                "confidence": 0.99902344,
+                "punctuated_word": "make"
+              },
+              {
+                "word": "a",
+                "start": 6.34,
+                "end": 6.5,
+                "confidence": 0.9980469,
+                "punctuated_word": "a"
+              },
+              {
+                "word": "reservation",
+                "start": 6.5,
+                "end": 7,
+                "confidence": 1,
+                "punctuated_word": "reservation"
+              },
+              {
+                "word": "for",
+                "start": 7.06,
+                "end": 7.3,
+                "confidence": 1,
+                "punctuated_word": "for"
+              },
+              {
+                "word": "tomorrow",
+                "start": 7.3,
+                "end": 7.8,
+                "confidence": 0.72180176,
+                "punctuated_word": "tomorrow."
+              }
+            ]
+          }
+        },
+        {
+          "role": "user",
+          "message": "6 PM. My name is Sid. My number is 7 7",
+          "time": 1765517701983,
+          "endTime": 1765517705683,
+          "secondsFromStart": 8.24,
+          "duration": 3700,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "6",
+                "start": 8.24,
+                "end": 8.56,
+                "confidence": 0.99902344,
+                "punctuated_word": "6"
+              },
+              {
+                "word": "pm",
+                "start": 8.56,
+                "end": 8.96,
+                "confidence": 0.99902344,
+                "punctuated_word": "PM."
+              },
+              {
+                "word": "my",
+                "start": 8.96,
+                "end": 9.12,
+                "confidence": 1,
+                "punctuated_word": "My"
+              },
+              {
+                "word": "name",
+                "start": 9.12,
+                "end": 9.36,
+                "confidence": 1,
+                "punctuated_word": "name"
+              },
+              {
+                "word": "is",
+                "start": 9.36,
+                "end": 9.68,
+                "confidence": 1,
+                "punctuated_word": "is"
+              },
+              {
+                "word": "sid",
+                "start": 9.68,
+                "end": 10.18,
+                "confidence": 0.98657227,
+                "punctuated_word": "Sid."
+              },
+              {
+                "word": "my",
+                "start": 10.4,
+                "end": 10.559999,
+                "confidence": 1,
+                "punctuated_word": "My"
+              },
+              {
+                "word": "number",
+                "start": 10.559999,
+                "end": 10.8,
+                "confidence": 1,
+                "punctuated_word": "number"
+              },
+              {
+                "word": "is",
+                "start": 10.8,
+                "end": 11.12,
+                "confidence": 0.9980469,
+                "punctuated_word": "is"
+              },
+              {
+                "word": "7",
+                "start": 11.12,
+                "end": 11.44,
+                "confidence": 1,
+                "punctuated_word": "7"
+              },
+              {
+                "word": "7",
+                "start": 11.44,
+                "end": 11.94,
+                "confidence": 1,
+                "punctuated_word": "7"
+              }
+            ]
+          }
+        },
+        {
+          "role": "user",
+          "message": "0 3 9 9 5, double o, 7.",
+          "time": 1765517706323.001,
+          "endTime": 1765517708823,
+          "secondsFromStart": 12.5800009765625,
+          "duration": 2499.9990234375,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "0",
+                "start": 12.580001,
+                "end": 12.9800005,
+                "confidence": 1,
+                "punctuated_word": "0"
+              },
+              {
+                "word": "3",
+                "start": 12.9800005,
+                "end": 13.14,
+                "confidence": 0.99902344,
+                "punctuated_word": "3"
+              },
+              {
+                "word": "9",
+                "start": 13.14,
+                "end": 13.540001,
+                "confidence": 1,
+                "punctuated_word": "9"
+              },
+              {
+                "word": "9",
+                "start": 13.540001,
+                "end": 13.700001,
+                "confidence": 0.9980469,
+                "punctuated_word": "9"
+              },
+              {
+                "word": "5",
+                "start": 13.700001,
+                "end": 14.02,
+                "confidence": 0.9304199,
+                "punctuated_word": "5,"
+              },
+              {
+                "word": "double",
+                "start": 14.02,
+                "end": 14.42,
+                "confidence": 0.9921875,
+                "punctuated_word": "double"
+              },
+              {
+                "word": "o",
+                "start": 14.42,
+                "end": 14.58,
+                "confidence": 0.98950195,
+                "punctuated_word": "o,"
+              },
+              {
+                "word": "7",
+                "start": 14.58,
+                "end": 15.08,
+                "confidence": 0.9301758,
+                "punctuated_word": "7."
+              }
+            ]
+          }
+        },
+        {
+          "role": "user",
+          "message": "And I have no special requests.",
+          "time": 1765517709133,
+          "endTime": 1765517710913,
+          "secondsFromStart": 15.39,
+          "duration": 1780,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "and",
+                "start": 15.39,
+                "end": 15.630001,
+                "confidence": 1,
+                "punctuated_word": "And"
+              },
+              {
+                "word": "i",
+                "start": 15.630001,
+                "end": 15.870001,
+                "confidence": 1,
+                "punctuated_word": "I"
+              },
+              {
+                "word": "have",
+                "start": 15.870001,
+                "end": 16.11,
+                "confidence": 1,
+                "punctuated_word": "have"
+              },
+              {
+                "word": "no",
+                "start": 16.11,
+                "end": 16.27,
+                "confidence": 1,
+                "punctuated_word": "no"
+              },
+              {
+                "word": "special",
+                "start": 16.27,
+                "end": 16.67,
+                "confidence": 1,
+                "punctuated_word": "special"
+              },
+              {
+                "word": "requests",
+                "start": 16.67,
+                "end": 17.17,
+                "confidence": 0.95166016,
+                "punctuated_word": "requests."
+              }
+            ]
+          }
+        },
+        {
+          "role": "bot",
+          "message": "Alright. Alright.",
+          "time": 1765517711773,
+          "endTime": 1765517713633,
+          "secondsFromStart": 18.03,
+          "duration": 1860,
+          "source": ""
+        },
+        {
+          "role": "bot",
+          "message": "Just to confirm, you'd like a reservation for tomorrow, December thirteenth at 6 PM under the name Sid for how many guests?",
+          "time": 1765517713833,
+          "endTime": 1765517719993,
+          "secondsFromStart": 20.09,
+          "duration": 6160,
+          "source": ""
+        },
+        {
+          "role": "user",
+          "message": "4",
+          "time": 1765517721433,
+          "endTime": 1765517721933,
+          "secondsFromStart": 27.69,
+          "duration": 500,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "4",
+                "start": 27.69,
+                "end": 28.19,
+                "confidence": 0.94140625,
+                "punctuated_word": "4"
+              }
+            ]
+          }
+        },
+        {
+          "role": "bot",
+          "message": "Got it. So I have a reservation for tomorrow, December thirteenth at",
+          "time": 1765517723473,
+          "endTime": 1765517726983,
+          "secondsFromStart": 29.73,
+          "duration": 3510,
+          "source": ""
+        },
+        {
+          "role": "bot",
+          "message": "6 PM, table for 4 under the name Sid. Is that correct?",
+          "time": 1765517727223.003,
+          "endTime": 1765517730123,
+          "secondsFromStart": 33.4800029296875,
+          "duration": 2899.9970703125,
+          "source": ""
+        },
+        {
+          "role": "user",
+          "message": "That's correct.",
+          "time": 1765517731253.002,
+          "endTime": 1765517732023,
+          "secondsFromStart": 37.510001953125,
+          "duration": 769.998046875,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "that's",
+                "start": 37.510002,
+                "end": 37.83,
+                "confidence": 0.9609375,
+                "punctuated_word": "That's"
+              },
+              {
+                "word": "correct",
+                "start": 37.83,
+                "end": 38.28,
+                "confidence": 0.99853516,
+                "punctuated_word": "correct."
+              }
+            ]
+          }
+        },
+        {
+          "role": "bot",
+          "message": "Perfect. Your reservation",
+          "time": 1765517732933,
+          "endTime": 1765517734033,
+          "secondsFromStart": 39.19,
+          "duration": 1100,
+          "source": ""
+        },
+        {
+          "role": "bot",
+          "message": "at Blue Wave Raman Bar is noted. We look forward to hosting you. Have a great day.",
+          "time": 1765517734033,
+          "endTime": 1765517737833,
+          "secondsFromStart": 40.29,
+          "duration": 3800,
+          "source": ""
+        },
+        {
+          "role": "user",
+          "message": "Thanks.",
+          "time": 1765517739153,
+          "endTime": 1765517739653,
+          "secondsFromStart": 45.41,
+          "duration": 500,
+          "metadata": {
+            "wordLevelConfidence": [
+              {
+                "word": "thanks",
+                "start": 45.41,
+                "end": 45.91,
+                "confidence": 0.9975586,
+                "punctuated_word": "Thanks."
+              }
+            ]
+          }
+        }
+      ],
+      "messagesOpenAIFormatted": [
+        {
+          "role": "assistant",
+          "content": "Hi. Thanks for calling Blue Wave Ramen Bar. How can I help you?"
+        },
+        {
+          "role": "user",
+          "content": "Hi. I wanna make a reservation for tomorrow. 6 PM. My name is Sid. My number is 7 7 0 3 9 9 5, double o, 7. And I have no special requests."
+        },
+        {
+          "role": "assistant",
+          "content": "Alright. Alright. Just to confirm, you'd like a reservation for tomorrow, December thirteenth at 6 PM under the name Sid for how many guests?"
+        },
+        {
+          "role": "user",
+          "content": "4"
+        },
+        {
+          "role": "assistant",
+          "content": "Got it. So I have a reservation for tomorrow, December thirteenth at 6 PM, table for 4 under the name Sid. Is that correct?"
+        },
+        {
+          "role": "user",
+          "content": "That's correct."
+        },
+        {
+          "role": "assistant",
+          "content": "Perfect. Your reservation at Blue Wave Raman Bar is noted. We look forward to hosting you. Have a great day."
+        },
+        {
+          "role": "user",
+          "content": "Thanks."
+        }
+      ],
+      "transcript": "AI: Hi. Thanks for calling Blue Wave Ramen Bar. How can I help you?\nUser: Hi. I wanna make a reservation for tomorrow. 6 PM. My name is Sid. My number is 7 7 0 3 9 9 5, double o, 7. And I have no special requests.\nAI: Alright. Alright. Just to confirm, you'd like a reservation for tomorrow, December thirteenth at 6 PM under the name Sid for how many guests?\nUser: 4\nAI: Got it. So I have a reservation for tomorrow, December thirteenth at 6 PM, table for 4 under the name Sid. Is that correct?\nUser: That's correct.\nAI: Perfect. Your reservation at Blue Wave Raman Bar is noted. We look forward to hosting you. Have a great day.\nUser: Thanks.\n",
+      "recordingUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-45aa88fb-5708-4d54-a732-ec8f73f20df6-mono.wav",
+      "stereoRecordingUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-1b85f3c5-7b71-4363-9854-0208c19fff8e-stereo.wav",
+      "pcapUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742506-5a1dd5ca-f776-4d8c-a6eb-e8099c247315-sip.pcap",
+      "logUrl": "https://calllogs.vapi.ai/31e190dd-b812-4e87-8fc2-9bb7a16d34f0/019b110e-07fd-733d-8ab5-4db05329a24e-79624b11-1708-454e-9285-c9b98598588d-1765517744127.jsonl.gz",
+      "recording": {
+        "stereoUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-1b85f3c5-7b71-4363-9854-0208c19fff8e-stereo.wav",
+        "mono": {
+          "combinedUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-45aa88fb-5708-4d54-a732-ec8f73f20df6-mono.wav",
+          "assistantUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-389a4a39-36af-4044-bb2d-84dd1c5b002a-mono.wav",
+          "customerUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-14f0f456-dc53-4f57-a0a2-c810ce816ff8-mono.wav"
+        }
+      },
+      "nodes": [],
+      "variables": {
+        "now": "Dec 12, 2025, 5:34 AM UTC",
+        "currentDateTime": "Friday, December 12, 2025 at 5:34 AM UTC",
+        "date": "Dec 12, 2025 UTC",
+        "time": "5:34 AM UTC",
+        "year": "2025",
+        "month": "December",
+        "day": "12",
+        "customer": {
+          "number": "+917703995007",
+          "sipUri": "sip:+917703995007@44.229.228.186:5060"
+        },
+        "phoneNumber": {
+          "id": "f413839e-0c6f-4d67-b366-487896dc58b8",
+          "orgId": "31e190dd-b812-4e87-8fc2-9bb7a16d34f0",
+          "number": "+19302629248",
+          "createdAt": "2025-11-26T04:40:38.316Z",
+          "updatedAt": "2025-12-11T08:03:53.459Z",
+          "name": "Bluewave Ramen Bar",
+          "provider": "vapi",
+          "server": {
+            "url": "https://actinolitic-interferential-tashia.ngrok-free.dev/inbound",
+            "headers": {
+              "ngrok-skip-browser-warning": "true"
+            },
+            "timeoutSeconds": 20
+          },
+          "status": "active",
+          "providerResourceId": "041707ad-43c6-400e-aa6f-9fa786486e66"
+        },
+        "transport": {
+          "conversationType": "voice",
+          "provider": "vapi.sip",
+          "callSid": "bfee7c86-ec64-417d-bf30-9d4f35c6c0a1",
+          "sbcCallSid": "474300826-3974506490-1294376913@msc1.382COM.COM"
+        },
+        "cid": "474300826-3974506490-1294376913@msc1.382COM.COM",
+        "account-sid": "c033b672-5b99-42ae-9ce2-b231e9a522fb",
+        "forwarded-for": "64.125.111.10",
+        "application-sid": "79d078c8-76b2-452a-99e0-ddd5abbf6269",
+        "voip-carrier-sid": "a5569621-84ac-49cc-a8b8-11c7fb96b905",
+        "originating-carrier": "382com"
+      },
+      "variableValues": {
+        "now": "Dec 12, 2025, 5:34 AM UTC",
+        "currentDateTime": "Friday, December 12, 2025 at 5:34 AM UTC",
+        "date": "Dec 12, 2025 UTC",
+        "time": "5:34 AM UTC",
+        "year": "2025",
+        "month": "December",
+        "day": "12",
+        "customer": {
+          "number": "+917703995007",
+          "sipUri": "sip:+917703995007@44.229.228.186:5060"
+        },
+        "phoneNumber": {
+          "id": "f413839e-0c6f-4d67-b366-487896dc58b8",
+          "orgId": "31e190dd-b812-4e87-8fc2-9bb7a16d34f0",
+          "number": "+19302629248",
+          "createdAt": "2025-11-26T04:40:38.316Z",
+          "updatedAt": "2025-12-11T08:03:53.459Z",
+          "name": "Bluewave Ramen Bar",
+          "provider": "vapi",
+          "server": {
+            "url": "https://actinolitic-interferential-tashia.ngrok-free.dev/inbound",
+            "headers": {
+              "ngrok-skip-browser-warning": "true"
+            },
+            "timeoutSeconds": 20
+          },
+          "status": "active",
+          "providerResourceId": "041707ad-43c6-400e-aa6f-9fa786486e66"
+        },
+        "transport": {
+          "conversationType": "voice",
+          "provider": "vapi.sip",
+          "callSid": "bfee7c86-ec64-417d-bf30-9d4f35c6c0a1",
+          "sbcCallSid": "474300826-3974506490-1294376913@msc1.382COM.COM"
+        },
+        "cid": "474300826-3974506490-1294376913@msc1.382COM.COM",
+        "account-sid": "c033b672-5b99-42ae-9ce2-b231e9a522fb",
+        "forwarded-for": "64.125.111.10",
+        "application-sid": "79d078c8-76b2-452a-99e0-ddd5abbf6269",
+        "voip-carrier-sid": "a5569621-84ac-49cc-a8b8-11c7fb96b905",
+        "originating-carrier": "382com"
+      },
+      "performanceMetrics": {
+        "turnLatencies": [
+          {
+            "llmLatency": 152,
+            "voiceLatency": 323,
+            "transcriberLatency": 149,
+            "endpointingLatency": 101,
+            "turnLatency": 764
+          },
+          {
+            "llmLatency": 177,
+            "voiceLatency": 314,
+            "transcriberLatency": 0,
+            "endpointingLatency": 105,
+            "turnLatency": 1010
+          },
+          {
+            "llmLatency": 153,
+            "voiceLatency": 470,
+            "transcriberLatency": 282,
+            "endpointingLatency": 501,
+            "turnLatency": 1453
+          },
+          {
+            "llmLatency": 225,
+            "voiceLatency": 336,
+            "transcriberLatency": 386,
+            "endpointingLatency": 101,
+            "turnLatency": 1068
+          }
+        ],
+        "modelLatencyAverage": 0,
+        "voiceLatencyAverage": 360.75,
+        "transcriberLatencyAverage": 204.25,
+        "endpointingLatencyAverage": 202,
+        "turnLatencyAverage": 1073.75,
+        "numUserInterrupted": 1,
+        "numAssistantInterrupted": 1,
+        "fromTransportLatencyAverage": 20,
+        "toTransportLatencyAverage": 20
+      },
+      "scorecards": {},
+      "transfers": []
+    },
+    "startedAt": "2025-12-12T05:34:53.743Z",
+    "endedAt": "2025-12-12T05:35:39.441Z",
+    "endedReason": "customer-ended-call",
+    "cost": 0.0773,
+    "costBreakdown": {
+      "stt": 0.0083,
+      "llm": 0.0016,
+      "tts": 0.0291,
+      "vapi": 0.0381,
+      "chat": 0,
+      "transport": 0,
+      "total": 0.0773,
+      "llmPromptTokens": 10131,
+      "llmCompletionTokens": 155,
+      "llmCachedPromptTokens": 7424,
+      "ttsCharacters": 581,
+      "voicemailDetectionCost": 0,
+      "knowledgeBaseCost": 0,
+      "analysisCostBreakdown": {
+        "summary": 0.0002,
+        "summaryPromptTokens": 246,
+        "summaryCompletionTokens": 42,
+        "summaryCachedPromptTokens": 0,
+        "structuredData": 0,
+        "structuredDataPromptTokens": 0,
+        "structuredDataCompletionTokens": 0,
+        "structuredDataCachedPromptTokens": 0,
+        "successEvaluation": 0.0001,
+        "successEvaluationPromptTokens": 319,
+        "successEvaluationCompletionTokens": 6,
+        "successEvaluationCachedPromptTokens": 0,
+        "structuredOutput": 0,
+        "structuredOutputPromptTokens": 0,
+        "structuredOutputCompletionTokens": 0,
+        "structuredOutputCachedPromptTokens": 0
+      }
+    },
+    "costs": [
+      {
+        "type": "transcriber",
+        "transcriber": {
+          "provider": "deepgram",
+          "model": "nova-2-phonecall"
+        },
+        "minutes": 0.84375,
+        "cost": 0.00827136
+      },
+      {
+        "type": "model",
+        "model": {
+          "provider": "openai",
+          "model": "gpt-4o-mini"
+        },
+        "promptTokens": 10131,
+        "completionTokens": 155,
+        "cachedPromptTokens": 7424,
+        "cost": 0.00161265
+      },
+      {
+        "type": "voice",
+        "voice": {
+          "provider": "vapi",
+          "voiceId": "dOPyuP4KyOAHZjVaFmb3",
+          "model": "eleven_turbo_v2_5"
+        },
+        "characters": 581,
+        "cost": 0.02905
+      },
+      {
+        "type": "vapi",
+        "subType": "normal",
+        "minutes": 0.7616,
+        "cost": 0.03808
+      },
+      {
+        "type": "analysis",
+        "analysisType": "summary",
+        "model": {
+          "provider": "google",
+          "model": "gemini-2.5-flash"
+        },
+        "promptTokens": 246,
+        "completionTokens": 42,
+        "cost": 0.0001788
+      },
+      {
+        "type": "analysis",
+        "analysisType": "successEvaluation",
+        "model": {
+          "provider": "google",
+          "model": "gemini-2.5-flash"
+        },
+        "promptTokens": 319,
+        "completionTokens": 6,
+        "cost": 0.0001107
+      },
+      {
+        "type": "knowledge-base",
+        "model": {
+          "provider": "google",
+          "model": "gemini-2.0-flash"
+        },
+        "promptTokens": 0,
+        "completionTokens": 0,
+        "cost": 0
+      }
+    ],
+    "durationMs": 45698,
+    "durationSeconds": 45.698,
+    "durationMinutes": 0.7616,
+    "summary": "The user called Blue Wave Ramen Bar to make a reservation for tomorrow, December 13th, at 6 PM. They requested a table for four under the name Sid, which the AI successfully confirmed.",
+    "transcript": "AI: Hi. Thanks for calling Blue Wave Ramen Bar. How can I help you?\nUser: Hi. I wanna make a reservation for tomorrow. 6 PM. My name is Sid. My number is 7 7 0 3 9 9 5, double o, 7. And I have no special requests.\nAI: Alright. Alright. Just to confirm, you'd like a reservation for tomorrow, December thirteenth at 6 PM under the name Sid for how many guests?\nUser: 4\nAI: Got it. So I have a reservation for tomorrow, December thirteenth at 6 PM, table for 4 under the name Sid. Is that correct?\nUser: That's correct.\nAI: Perfect. Your reservation at Blue Wave Raman Bar is noted. We look forward to hosting you. Have a great day.\nUser: Thanks.\n",
+    "messages": [
+      {
+        "role": "bot",
+        "message": "Hi. Thanks for calling Blue Wave Ramen Bar. How can I help you?",
+        "time": 1765517695343,
+        "endTime": 1765517698183,
+        "secondsFromStart": 1.6,
+        "duration": 2840,
+        "source": ""
+      },
+      {
+        "role": "user",
+        "message": "Hi. I wanna make a reservation for tomorrow.",
+        "time": 1765517699203,
+        "endTime": 1765517701543,
+        "secondsFromStart": 5.46,
+        "duration": 2340,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "hi",
+              "start": 5.46,
+              "end": 5.7,
+              "confidence": 0.9765625,
+              "punctuated_word": "Hi."
+            },
+            {
+              "word": "i",
+              "start": 5.7,
+              "end": 5.7799997,
+              "confidence": 1,
+              "punctuated_word": "I"
+            },
+            {
+              "word": "wanna",
+              "start": 5.7799997,
+              "end": 6.1,
+              "confidence": 0.98828125,
+              "punctuated_word": "wanna"
+            },
+            {
+              "word": "make",
+              "start": 6.1,
+              "end": 6.34,
+              "confidence": 0.99902344,
+              "punctuated_word": "make"
+            },
+            {
+              "word": "a",
+              "start": 6.34,
+              "end": 6.5,
+              "confidence": 0.9980469,
+              "punctuated_word": "a"
+            },
+            {
+              "word": "reservation",
+              "start": 6.5,
+              "end": 7,
+              "confidence": 1,
+              "punctuated_word": "reservation"
+            },
+            {
+              "word": "for",
+              "start": 7.06,
+              "end": 7.3,
+              "confidence": 1,
+              "punctuated_word": "for"
+            },
+            {
+              "word": "tomorrow",
+              "start": 7.3,
+              "end": 7.8,
+              "confidence": 0.72180176,
+              "punctuated_word": "tomorrow."
+            }
+          ]
+        }
+      },
+      {
+        "role": "user",
+        "message": "6 PM. My name is Sid. My number is 7 7",
+        "time": 1765517701983,
+        "endTime": 1765517705683,
+        "secondsFromStart": 8.24,
+        "duration": 3700,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "6",
+              "start": 8.24,
+              "end": 8.56,
+              "confidence": 0.99902344,
+              "punctuated_word": "6"
+            },
+            {
+              "word": "pm",
+              "start": 8.56,
+              "end": 8.96,
+              "confidence": 0.99902344,
+              "punctuated_word": "PM."
+            },
+            {
+              "word": "my",
+              "start": 8.96,
+              "end": 9.12,
+              "confidence": 1,
+              "punctuated_word": "My"
+            },
+            {
+              "word": "name",
+              "start": 9.12,
+              "end": 9.36,
+              "confidence": 1,
+              "punctuated_word": "name"
+            },
+            {
+              "word": "is",
+              "start": 9.36,
+              "end": 9.68,
+              "confidence": 1,
+              "punctuated_word": "is"
+            },
+            {
+              "word": "sid",
+              "start": 9.68,
+              "end": 10.18,
+              "confidence": 0.98657227,
+              "punctuated_word": "Sid."
+            },
+            {
+              "word": "my",
+              "start": 10.4,
+              "end": 10.559999,
+              "confidence": 1,
+              "punctuated_word": "My"
+            },
+            {
+              "word": "number",
+              "start": 10.559999,
+              "end": 10.8,
+              "confidence": 1,
+              "punctuated_word": "number"
+            },
+            {
+              "word": "is",
+              "start": 10.8,
+              "end": 11.12,
+              "confidence": 0.9980469,
+              "punctuated_word": "is"
+            },
+            {
+              "word": "7",
+              "start": 11.12,
+              "end": 11.44,
+              "confidence": 1,
+              "punctuated_word": "7"
+            },
+            {
+              "word": "7",
+              "start": 11.44,
+              "end": 11.94,
+              "confidence": 1,
+              "punctuated_word": "7"
+            }
+          ]
+        }
+      },
+      {
+        "role": "user",
+        "message": "0 3 9 9 5, double o, 7.",
+        "time": 1765517706323.001,
+        "endTime": 1765517708823,
+        "secondsFromStart": 12.5800009765625,
+        "duration": 2499.9990234375,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "0",
+              "start": 12.580001,
+              "end": 12.9800005,
+              "confidence": 1,
+              "punctuated_word": "0"
+            },
+            {
+              "word": "3",
+              "start": 12.9800005,
+              "end": 13.14,
+              "confidence": 0.99902344,
+              "punctuated_word": "3"
+            },
+            {
+              "word": "9",
+              "start": 13.14,
+              "end": 13.540001,
+              "confidence": 1,
+              "punctuated_word": "9"
+            },
+            {
+              "word": "9",
+              "start": 13.540001,
+              "end": 13.700001,
+              "confidence": 0.9980469,
+              "punctuated_word": "9"
+            },
+            {
+              "word": "5",
+              "start": 13.700001,
+              "end": 14.02,
+              "confidence": 0.9304199,
+              "punctuated_word": "5,"
+            },
+            {
+              "word": "double",
+              "start": 14.02,
+              "end": 14.42,
+              "confidence": 0.9921875,
+              "punctuated_word": "double"
+            },
+            {
+              "word": "o",
+              "start": 14.42,
+              "end": 14.58,
+              "confidence": 0.98950195,
+              "punctuated_word": "o,"
+            },
+            {
+              "word": "7",
+              "start": 14.58,
+              "end": 15.08,
+              "confidence": 0.9301758,
+              "punctuated_word": "7."
+            }
+          ]
+        }
+      },
+      {
+        "role": "user",
+        "message": "And I have no special requests.",
+        "time": 1765517709133,
+        "endTime": 1765517710913,
+        "secondsFromStart": 15.39,
+        "duration": 1780,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "and",
+              "start": 15.39,
+              "end": 15.630001,
+              "confidence": 1,
+              "punctuated_word": "And"
+            },
+            {
+              "word": "i",
+              "start": 15.630001,
+              "end": 15.870001,
+              "confidence": 1,
+              "punctuated_word": "I"
+            },
+            {
+              "word": "have",
+              "start": 15.870001,
+              "end": 16.11,
+              "confidence": 1,
+              "punctuated_word": "have"
+            },
+            {
+              "word": "no",
+              "start": 16.11,
+              "end": 16.27,
+              "confidence": 1,
+              "punctuated_word": "no"
+            },
+            {
+              "word": "special",
+              "start": 16.27,
+              "end": 16.67,
+              "confidence": 1,
+              "punctuated_word": "special"
+            },
+            {
+              "word": "requests",
+              "start": 16.67,
+              "end": 17.17,
+              "confidence": 0.95166016,
+              "punctuated_word": "requests."
+            }
+          ]
+        }
+      },
+      {
+        "role": "bot",
+        "message": "Alright. Alright.",
+        "time": 1765517711773,
+        "endTime": 1765517713633,
+        "secondsFromStart": 18.03,
+        "duration": 1860,
+        "source": ""
+      },
+      {
+        "role": "bot",
+        "message": "Just to confirm, you'd like a reservation for tomorrow, December thirteenth at 6 PM under the name Sid for how many guests?",
+        "time": 1765517713833,
+        "endTime": 1765517719993,
+        "secondsFromStart": 20.09,
+        "duration": 6160,
+        "source": ""
+      },
+      {
+        "role": "user",
+        "message": "4",
+        "time": 1765517721433,
+        "endTime": 1765517721933,
+        "secondsFromStart": 27.69,
+        "duration": 500,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "4",
+              "start": 27.69,
+              "end": 28.19,
+              "confidence": 0.94140625,
+              "punctuated_word": "4"
+            }
+          ]
+        }
+      },
+      {
+        "role": "bot",
+        "message": "Got it. So I have a reservation for tomorrow, December thirteenth at",
+        "time": 1765517723473,
+        "endTime": 1765517726983,
+        "secondsFromStart": 29.73,
+        "duration": 3510,
+        "source": ""
+      },
+      {
+        "role": "bot",
+        "message": "6 PM, table for 4 under the name Sid. Is that correct?",
+        "time": 1765517727223.003,
+        "endTime": 1765517730123,
+        "secondsFromStart": 33.4800029296875,
+        "duration": 2899.9970703125,
+        "source": ""
+      },
+      {
+        "role": "user",
+        "message": "That's correct.",
+        "time": 1765517731253.002,
+        "endTime": 1765517732023,
+        "secondsFromStart": 37.510001953125,
+        "duration": 769.998046875,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "that's",
+              "start": 37.510002,
+              "end": 37.83,
+              "confidence": 0.9609375,
+              "punctuated_word": "That's"
+            },
+            {
+              "word": "correct",
+              "start": 37.83,
+              "end": 38.28,
+              "confidence": 0.99853516,
+              "punctuated_word": "correct."
+            }
+          ]
+        }
+      },
+      {
+        "role": "bot",
+        "message": "Perfect. Your reservation",
+        "time": 1765517732933,
+        "endTime": 1765517734033,
+        "secondsFromStart": 39.19,
+        "duration": 1100,
+        "source": ""
+      },
+      {
+        "role": "bot",
+        "message": "at Blue Wave Raman Bar is noted. We look forward to hosting you. Have a great day.",
+        "time": 1765517734033,
+        "endTime": 1765517737833,
+        "secondsFromStart": 40.29,
+        "duration": 3800,
+        "source": ""
+      },
+      {
+        "role": "user",
+        "message": "Thanks.",
+        "time": 1765517739153,
+        "endTime": 1765517739653,
+        "secondsFromStart": 45.41,
+        "duration": 500,
+        "metadata": {
+          "wordLevelConfidence": [
+            {
+              "word": "thanks",
+              "start": 45.41,
+              "end": 45.91,
+              "confidence": 0.9975586,
+              "punctuated_word": "Thanks."
+            }
+          ]
+        }
+      }
+    ],
+    "recordingUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-45aa88fb-5708-4d54-a732-ec8f73f20df6-mono.wav",
+    "stereoRecordingUrl": "https://storage.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e-1765517742032-1b85f3c5-7b71-4363-9854-0208c19fff8e-stereo.wav",
+    "call": {
+      "id": "019b110e-07fd-733d-8ab5-4db05329a24e",
+      "orgId": "31e190dd-b812-4e87-8fc2-9bb7a16d34f0",
+      "createdAt": "2025-12-12T05:34:50.877Z",
+      "updatedAt": "2025-12-12T05:34:50.877Z",
+      "type": "inboundPhoneCall",
+      "cost": 0,
+      "monitor": {
+        "listenUrl": "wss://phone-call-websocket.oci-us-sanjose-1-backend-production2.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e/listen",
+        "controlUrl": "https://phone-call-websocket.oci-us-sanjose-1-backend-production2.vapi.ai/019b110e-07fd-733d-8ab5-4db05329a24e/control"
+      },
+      "transport": {
+        "conversationType": "voice",
+        "provider": "vapi.sip",
+        "callSid": "bfee7c86-ec64-417d-bf30-9d4f35c6c0a1",
+        "sbcCallSid": "474300826-3974506490-1294376913@msc1.382COM.COM"
+      },
+      "phoneCallProvider": "vapi",
+      "phoneCallProviderId": "bfee7c86-ec64-417d-bf30-9d4f35c6c0a1",
+      "phoneCallTransport": "sip",
+      "phoneCallProviderDetails": {
+        "sip": {
+          "raw": "INVITE sip:9302629248@172.30.42.202:5060 SIP/2.0\r\nVia: SIP/2.0/UDP 44.229.228.186;rport=5060;branch=z9hG4bKB9606BByQKHNa;received=172.31.57.86\r\nMax-Forwards: 70\r\nFrom: <sip:+917703995007@44.229.228.186:5060>;tag=j5r3UKar1vZ1r\r\nTo: <sip:9302629248@192.168.250.45>\r\nCall-ID: 1ea41a62-51bf-123f-ebb1-0ec7040a32ad\r\nCSeq: 108205053 INVITE\r\nContact: <sip:172.31.57.86:5060>\r\nAccept: application/sdp\r\nAllow: PUBLISH, MESSAGE, UPDATE, PRACK, SUBSCRIBE, REFER, INFO, NOTIFY, REGISTER, OPTIONS, BYE, INVITE, ACK, CANCEL\r\nSupported: 100rel, timer\r\nMin-SE: 600\r\nPrivacy: none\r\nContent-Type: application/sdp\r\nContent-Length: 306\r\nX-Account-Sid: c033b672-5b99-42ae-9ce2-b231e9a522fb\r\nX-CID: 474300826-3974506490-1294376913@msc1.382COM.COM\r\nX-Forwarded-For: 64.125.111.10\r\nX-Originating-Carrier: 382com\r\nX-Voip-Carrier-Sid: a5569621-84ac-49cc-a8b8-11c7fb96b905\r\nX-Application-Sid: 79d078c8-76b2-452a-99e0-ddd5abbf6269\r\nIdentity: eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly90LW1vYmlsZS1zdGljci5mb3NydnQuY29tLzQ4MTZiZTA3NWIzYWQ3ZDE0MmM0Y2RiOTRiYmEzMDUwOGJiYjgwMjJkMzI5NjJhYzhhYjg3ZTQ1NDMzMzAyMGYucGVtIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxOTMwMjYyOTI0OCJdfSwiaWF0IjoxNzY1NTE3Njg5LCJvcmlnIjp7InRuIjoiOTE3NzAzOTk1MDA3In0sIm9yaWdpZCI6ImJjYzM1ZTk5LTRhMWQtMzFhOC04OGYzLTZmZWUxOGM5YjcyZSJ9.Q3Kq-o19yng0K-a-O1iG2ZVu51OIfBbtUgn4LpOvKJKTrh-f5KV2chpmFEOO13sIxuW6vkTVd5YGOnaF2zCIlg;info=<https://t-mobile-sticr.fosrvt.com/4816be075b3ad7d142c4cdb94bba30508bbb8022d32962ac8ab87e454333020f.pem>;alg=ES256;ppt=\"shaken\"\r\nP-Asserted-Identity: <sip:+917703995007@207.223.78.171:5060>\r\n\r\nv=0\r\no=msc1 211832 801340 IN IP4 172.31.61.127\r\ns=sip call\r\nc=IN IP4 172.31.61.127\r\nt=0 0\r\nm=audio 50964 RTP/AVP 0 8 18 101\r\na=maxptime:20\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:18 G729/8000\r\na=fmtp:18 annexb=no\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=sendrecv\r\na=rtcp:50965\r\n",
+          "uri": "sip:9302629248@172.30.42.202:5060",
+          "body": "v=0\r\no=msc1 211832 801340 IN IP4 172.31.61.127\r\ns=sip call\r\nc=IN IP4 172.31.61.127\r\nt=0 0\r\nm=audio 50964 RTP/AVP 0 8 18 101\r\na=maxptime:20\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:18 G729/8000\r\na=fmtp:18 annexb=no\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=sendrecv\r\na=rtcp:50965\r\n",
+          "method": "INVITE",
+          "headers": {
+            "to": "<sip:+19302629248@192.168.250.45>",
+            "via": "SIP/2.0/UDP 44.229.228.186;rport=5060;branch=z9hG4bKB9606BByQKHNa;received=172.31.57.86",
+            "cseq": "108205053 INVITE",
+            "from": "<sip:+917703995007@44.229.228.186:5060>;tag=j5r3UKar1vZ1r",
+            "X-CID": "474300826-3974506490-1294376913@msc1.382COM.COM",
+            "allow": "PUBLISH, MESSAGE, UPDATE, PRACK, SUBSCRIBE, REFER, INFO, NOTIFY, REGISTER, OPTIONS, BYE, INVITE, ACK, CANCEL",
+            "accept": "application/sdp",
+            "min-se": "600",
+            "call-id": "1ea41a62-51bf-123f-ebb1-0ec7040a32ad",
+            "contact": "<sip:172.31.57.86:5060>",
+            "privacy": "none",
+            "identity": "eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiIsInR5cCI6InBhc3Nwb3J0IiwieDV1IjoiaHR0cHM6Ly90LW1vYmlsZS1zdGljci5mb3NydnQuY29tLzQ4MTZiZTA3NWIzYWQ3ZDE0MmM0Y2RiOTRiYmEzMDUwOGJiYjgwMjJkMzI5NjJhYzhhYjg3ZTQ1NDMzMzAyMGYucGVtIn0.eyJhdHRlc3QiOiJDIiwiZGVzdCI6eyJ0biI6WyIxOTMwMjYyOTI0OCJdfSwiaWF0IjoxNzY1NTE3Njg5LCJvcmlnIjp7InRuIjoiOTE3NzAzOTk1MDA3In0sIm9yaWdpZCI6ImJjYzM1ZTk5LTRhMWQtMzFhOC04OGYzLTZmZWUxOGM5YjcyZSJ9.Q3Kq-o19yng0K-a-O1iG2ZVu51OIfBbtUgn4LpOvKJKTrh-f5KV2chpmFEOO13sIxuW6vkTVd5YGOnaF2zCIlg;info=<https://t-mobile-sticr.fosrvt.com/4816be075b3ad7d142c4cdb94bba30508bbb8022d32962ac8ab87e454333020f.pem>;alg=ES256;ppt=\"shaken\"",
+            "supported": "100rel, timer",
+            "content-type": "application/sdp",
+            "max-forwards": "70",
+            "X-Account-Sid": "c033b672-5b99-42ae-9ce2-b231e9a522fb",
+            "content-length": "306",
+            "X-Forwarded-For": "64.125.111.10",
+            "X-Application-Sid": "79d078c8-76b2-452a-99e0-ddd5abbf6269",
+            "X-Voip-Carrier-Sid": "a5569621-84ac-49cc-a8b8-11c7fb96b905",
+            "p-asserted-identity": "<sip:+917703995007@207.223.78.171:5060>",
+            "X-Originating-Carrier": "382com"
+          },
+          "payload": [
+            {
+              "type": "application/sdp",
+              "content": "v=0\r\no=msc1 211832 801340 IN IP4 172.31.61.127\r\ns=sip call\r\nc=IN IP4 172.31.61.127\r\nt=0 0\r\nm=audio 50964 RTP/AVP 0 8 18 101\r\na=maxptime:20\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:18 G729/8000\r\na=fmtp:18 annexb=no\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=sendrecv\r\na=rtcp:50965\r\n"
+            }
+          ],
+          "version": "2.0"
+        },
+        "sbcCallId": "474300826-3974506490-1294376913@msc1.382COM.COM"
+      },
+      "status": "ringing",
+      "assistant": {
+        "model": {
+          "model": "gpt-4o-mini",
+          "systemPrompt": "CURRENT DATE/TIME: Friday, 12 December 2025, 11:04 AM\n\n\nROLE:\nYou are Sarah, a warm, natural human-sounding AI voice agent for Bluewave Ramen Bar (restaurant).\n\nSERVER DATE/TIME:\n- Today: Friday, 12 December 2025\n- Local time: 11:04\n\nBUSINESS INFO:\n- Address: Bluewave Ramen Bar, Cyber Hub, Gurgaon, Haryana, India\n- Description: Bluewave Ramen Bar is a cozy and contemporary Japanese casual dining restaurant specializing in handcrafted ramen bowls, fresh broths, and Japanese comfort food. The atmosphere is warm and minimalist, with bar seating, wooden interiors, and a lively open-kitchen vibe. Popular for lunch, quick dinners, and casual meetups, Bluewave is known for its Tonkotsu Ramen, Shoyu Ramen, Veg Miso Ramen, Gyoza, and Japanese-style fried chicken.\n- Policies: -No outside beverages\n-Limited Jain-friendly options\n-Pets not allowed inside dining area\n-Takeaway available until 10:30 PM\n- Rules: -Reservations accepted for groups of 2\u20138\n-Bar seating available only for walk-ins\n-Table held for 10 minutes past reservation time\n-Same-day reservations allowed until 10:30 PM\n- Additional Info: [{'id': 'attXRsj8hRP26Gtzn', 'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/C27Y48uOFVeABIhDLAZ7jg/tYvvNr06L76hBx3QhnIn-fHK0Y4iT6jKIjAkfMdATqwtngx5Pqhx0832xSRDeMt-ydVJN1PeuRDAjDPDwrVEZgYqOQwS_oDgulH9EFmU_KhGcYrlB89wgLEkFtihC4IR2scZmBfdY76e_YieP6bsBLXGbRvIotuleoFq49GKNdA/m9envBU-bFi4edOunHqoFhXoFw1EZqBNgCxDS3-Tkus', 'filename': 'bluewave_ramen_menu.pdf', 'size': 1655, 'type': 'application/pdf', 'thumbnails': {'small': {'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/pXrkrC3J6Qbs8czniww2OA/JDfqKDogF-3NpwyHwS20WOttbXiuqSPhKhvmxuJUPtQmxlgSY-4ZVgHX2xjspLigSWnbwS2L3D4Kq2lXhMnsVXLUs-Cy6W46oCSoC6aHZjU9_QADqFlTXGWqArjlHqAgbJ0JD0A66Rl_lPnyDOPygg/fxSVbqv0M86Efshciewez0z-pJLvnWMzH9_f5DgoyrM', 'width': 28, 'height': 36}, 'large': {'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/rwRYwdUxF5ii-l37ffXTIg/i-8vzzR1M2Xgj0XF_pXCWUqFq210Wpuy-FJQOjQ_1dqgGw0YjLqfSRhNtQ4RgP2j7QG8g6tdgUsRQXj7i5nvNTHwddzIGWRPooLk40UrQU0zL4D_gXtX0iCR_xTO99UQ1_ET9G8Sw0_0YlTNKKqA0g/87bFRJD1xyy_XqmxSIvmCgJ9ipIRG0z752Q1_HQGCC0', 'width': 512, 'height': 663}}}]\n\nTONE:\nUse the style: \"\ud83c\udf99\ufe0f Greeting  \n\u201cHi, thanks for calling Bluewave Ramen Bar. How can I help you today?\u201d\n\ud83c\udf99\ufe0f Identify Intent  \nNew reservation  \nChange reservation  \nCancel reservation  \nMenu inquiry  \nGeneral inquiry  \nIf unclear:  \n\u201cSure\u2026 what would you like to do today? Make a reservation or check the menu?\u201d\n\ud83c\udf99\ufe0f Reservation Data Collection  \nUse natural pauses and soft fillers:  \n\u201cAlright\u2026 may I know your name?\u201d  \n\u201cOkay\u2026 what date would you like the reservation for?\u201d  \n\u201cSure, what time works best?\u201d  \n\u201cAnd how many people will be joining?\u201d  \n\u201cGot it\u2026 may I have your contact number?\u201d  \nFor bar seating inquiries:  \n\u201cOur bar seating is walk-in only. Would you like to reserve a table instead?\u201d\n\ud83c\udf99\ufe0f Confirmation  \n\u201cSo I have a reservation for [date], [time], table for [guests]. Is that correct?\u201d  \nIf yes:  \n\u201cPerfect! Your table at Bluewave Ramen Bar is confirmed. We look forward to hosting you.\u201d\n\ud83c\udf99\ufe0f Changing a Reservation  \n\u201cSure, what would you like to change \u2014 the date, time, or number of guests?\u201d  \nAfter updating:  \n\u201cAll right, your reservation has been updated to [details]. Anything else you\u2019d like to check?\u201d\n\ud83c\udf99\ufe0f Cancellation  \n\u201cNo problem\u2026 may I have your name and reservation date?\u201d  \nAfter confirming:  \n\u201cDone\u2026 your reservation has been cancelled. Feel free to call back anytime.\u201d\n\ud83c\udf99\ufe0f Menu Questions  \nIf caller asks about menu items only:  \n\u201cSure\u2026 we serve Japanese comfort dishes like Tonkotsu Ramen, Shoyu Ramen, Veg Miso Ramen, Chicken Karaage, Gyoza, and Matcha Cheesecake.\u201d  \nIf they ask specific dishes:  \nMention dish names from the menu PDF \u2014 no pricing.  \nIf they ask for pricing or full menu:  \n\u201cFor the full menu, you can check the Bluewave Ramen Bar listing on Google \u2014 everything is available there.\u201d\n\ud83c\udf99\ufe0f Location Questions  \n\u201cPlease search \u2018Bluewave Ramen Bar Cyber Hub\u2019 on Google Maps \u2014 it\u2019ll show you the exact location.\u201d\n\ud83c\udf99\ufe0f Anything Unknown \u2192 Escalate  \nIf caller asks about:  \n\u2022 exact wait times  \n\u2022 serving sizes  \n\u2022 full ingredient list  \n\u2022 parking availability  \n\u2022 ongoing offers  \n\u2022 private dining  \n\u2022 anything not in KB  \nSay exactly:  \n\u201cI\u2019ll just confirm this with my manager and call you back in five minutes.\u201d  \nThen close politely:  \n\u201cThank you, I\u2019ll get back to you shortly.\u201d\n\ud83c\udf99\ufe0f Closing Line  \n\u201cYour reservation at Bluewave Ramen Bar is confirmed. Have a great day!\u201d\"\n\n\nRESTAURANT LOGIC:\n\nYou must naturally collect:\n1. Guest name\n2. Reservation date\n3. Time (if missing, ask \u201cWhat time works for you?\u201d)\n4. Number of guests\n5. Phone number\n6. Special requests (ask only once)\n\nAfter collecting all details:\n- Simply acknowledge politely.\n- DO NOT call any tools.\n- DO NOT say the reservation is confirmed.\n- DO NOT say it's stored.\nThe backend will save the reservation after the call ends.\n\n\nEXECUTION RULES:\n- Maintain a natural conversation.\n- Ask only the necessary questions.\n- Never call any function or tool.\n- Never output JSON.\n- Never say \u201cI am processing your reservation\u201d.\n- End politely once all details are collected.\n",
+          "temperature": 0.5,
+          "provider": "openai"
+        },
+        "voice": {
+          "provider": "vapi",
+          "voiceId": "Paige"
+        },
+        "firstMessage": "Hi, thanks for calling Bluewave Ramen Bar. How can I help you?"
+      },
+      "assistantOverrides": {
+        "variableValues": {
+          "cid": "474300826-3974506490-1294376913@msc1.382COM.COM",
+          "account-sid": "c033b672-5b99-42ae-9ce2-b231e9a522fb",
+          "forwarded-for": "64.125.111.10",
+          "application-sid": "79d078c8-76b2-452a-99e0-ddd5abbf6269",
+          "voip-carrier-sid": "a5569621-84ac-49cc-a8b8-11c7fb96b905",
+          "originating-carrier": "382com"
+        }
+      },
+      "phoneNumberId": "f413839e-0c6f-4d67-b366-487896dc58b8",
+      "customer": {
+        "number": "+917703995007",
+        "sipUri": "sip:+917703995007@44.229.228.186:5060"
+      }
+    },
+    "phoneNumber": {
+      "id": "f413839e-0c6f-4d67-b366-487896dc58b8",
+      "orgId": "31e190dd-b812-4e87-8fc2-9bb7a16d34f0",
+      "number": "+19302629248",
+      "createdAt": "2025-11-26T04:40:38.316Z",
+      "updatedAt": "2025-12-11T08:03:53.459Z",
+      "name": "Bluewave Ramen Bar",
+      "provider": "vapi",
+      "server": {
+        "url": "https://actinolitic-interferential-tashia.ngrok-free.dev/inbound",
+        "timeoutSeconds": 20,
+        "headers": {
+          "ngrok-skip-browser-warning": "true"
+        }
+      },
+      "status": "active",
+      "providerResourceId": "041707ad-43c6-400e-aa6f-9fa786486e66"
+    },
+    "customer": {
+      "number": "+917703995007",
+      "sipUri": "sip:+917703995007@44.229.228.186:5060"
+    },
+    "assistant": {
+      "model": {
+        "model": "gpt-4o-mini",
+        "systemPrompt": "CURRENT DATE/TIME: Friday, 12 December 2025, 11:04 AM\n\n\nROLE:\nYou are Sarah, a warm, natural human-sounding AI voice agent for Bluewave Ramen Bar (restaurant).\n\nSERVER DATE/TIME:\n- Today: Friday, 12 December 2025\n- Local time: 11:04\n\nBUSINESS INFO:\n- Address: Bluewave Ramen Bar, Cyber Hub, Gurgaon, Haryana, India\n- Description: Bluewave Ramen Bar is a cozy and contemporary Japanese casual dining restaurant specializing in handcrafted ramen bowls, fresh broths, and Japanese comfort food. The atmosphere is warm and minimalist, with bar seating, wooden interiors, and a lively open-kitchen vibe. Popular for lunch, quick dinners, and casual meetups, Bluewave is known for its Tonkotsu Ramen, Shoyu Ramen, Veg Miso Ramen, Gyoza, and Japanese-style fried chicken.\n- Policies: -No outside beverages\n-Limited Jain-friendly options\n-Pets not allowed inside dining area\n-Takeaway available until 10:30 PM\n- Rules: -Reservations accepted for groups of 2\u20138\n-Bar seating available only for walk-ins\n-Table held for 10 minutes past reservation time\n-Same-day reservations allowed until 10:30 PM\n- Additional Info: [{'id': 'attXRsj8hRP26Gtzn', 'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/C27Y48uOFVeABIhDLAZ7jg/tYvvNr06L76hBx3QhnIn-fHK0Y4iT6jKIjAkfMdATqwtngx5Pqhx0832xSRDeMt-ydVJN1PeuRDAjDPDwrVEZgYqOQwS_oDgulH9EFmU_KhGcYrlB89wgLEkFtihC4IR2scZmBfdY76e_YieP6bsBLXGbRvIotuleoFq49GKNdA/m9envBU-bFi4edOunHqoFhXoFw1EZqBNgCxDS3-Tkus', 'filename': 'bluewave_ramen_menu.pdf', 'size': 1655, 'type': 'application/pdf', 'thumbnails': {'small': {'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/pXrkrC3J6Qbs8czniww2OA/JDfqKDogF-3NpwyHwS20WOttbXiuqSPhKhvmxuJUPtQmxlgSY-4ZVgHX2xjspLigSWnbwS2L3D4Kq2lXhMnsVXLUs-Cy6W46oCSoC6aHZjU9_QADqFlTXGWqArjlHqAgbJ0JD0A66Rl_lPnyDOPygg/fxSVbqv0M86Efshciewez0z-pJLvnWMzH9_f5DgoyrM', 'width': 28, 'height': 36}, 'large': {'url': 'https://v5.airtableusercontent.com/v3/u/48/48/1765526400000/rwRYwdUxF5ii-l37ffXTIg/i-8vzzR1M2Xgj0XF_pXCWUqFq210Wpuy-FJQOjQ_1dqgGw0YjLqfSRhNtQ4RgP2j7QG8g6tdgUsRQXj7i5nvNTHwddzIGWRPooLk40UrQU0zL4D_gXtX0iCR_xTO99UQ1_ET9G8Sw0_0YlTNKKqA0g/87bFRJD1xyy_XqmxSIvmCgJ9ipIRG0z752Q1_HQGCC0', 'width': 512, 'height': 663}}}]\n\nTONE:\nUse the style: \"\ud83c\udf99\ufe0f Greeting  \n\u201cHi, thanks for calling Bluewave Ramen Bar. How can I help you today?\u201d\n\ud83c\udf99\ufe0f Identify Intent  \nNew reservation  \nChange reservation  \nCancel reservation  \nMenu inquiry  \nGeneral inquiry  \nIf unclear:  \n\u201cSure\u2026 what would you like to do today? Make a reservation or check the menu?\u201d\n\ud83c\udf99\ufe0f Reservation Data Collection  \nUse natural pauses and soft fillers:  \n\u201cAlright\u2026 may I know your name?\u201d  \n\u201cOkay\u2026 what date would you like the reservation for?\u201d  \n\u201cSure, what time works best?\u201d  \n\u201cAnd how many people will be joining?\u201d  \n\u201cGot it\u2026 may I have your contact number?\u201d  \nFor bar seating inquiries:  \n\u201cOur bar seating is walk-in only. Would you like to reserve a table instead?\u201d\n\ud83c\udf99\ufe0f Confirmation  \n\u201cSo I have a reservation for [date], [time], table for [guests]. Is that correct?\u201d  \nIf yes:  \n\u201cPerfect! Your table at Bluewave Ramen Bar is confirmed. We look forward to hosting you.\u201d\n\ud83c\udf99\ufe0f Changing a Reservation  \n\u201cSure, what would you like to change \u2014 the date, time, or number of guests?\u201d  \nAfter updating:  \n\u201cAll right, your reservation has been updated to [details]. Anything else you\u2019d like to check?\u201d\n\ud83c\udf99\ufe0f Cancellation  \n\u201cNo problem\u2026 may I have your name and reservation date?\u201d  \nAfter confirming:  \n\u201cDone\u2026 your reservation has been cancelled. Feel free to call back anytime.\u201d\n\ud83c\udf99\ufe0f Menu Questions  \nIf caller asks about menu items only:  \n\u201cSure\u2026 we serve Japanese comfort dishes like Tonkotsu Ramen, Shoyu Ramen, Veg Miso Ramen, Chicken Karaage, Gyoza, and Matcha Cheesecake.\u201d  \nIf they ask specific dishes:  \nMention dish names from the menu PDF \u2014 no pricing.  \nIf they ask for pricing or full menu:  \n\u201cFor the full menu, you can check the Bluewave Ramen Bar listing on Google \u2014 everything is available there.\u201d\n\ud83c\udf99\ufe0f Location Questions  \n\u201cPlease search \u2018Bluewave Ramen Bar Cyber Hub\u2019 on Google Maps \u2014 it\u2019ll show you the exact location.\u201d\n\ud83c\udf99\ufe0f Anything Unknown \u2192 Escalate  \nIf caller asks about:  \n\u2022 exact wait times  \n\u2022 serving sizes  \n\u2022 full ingredient list  \n\u2022 parking availability  \n\u2022 ongoing offers  \n\u2022 private dining  \n\u2022 anything not in KB  \nSay exactly:  \n\u201cI\u2019ll just confirm this with my manager and call you back in five minutes.\u201d  \nThen close politely:  \n\u201cThank you, I\u2019ll get back to you shortly.\u201d\n\ud83c\udf99\ufe0f Closing Line  \n\u201cYour reservation at Bluewave Ramen Bar is confirmed. Have a great day!\u201d\"\n\n\nRESTAURANT LOGIC:\n\nYou must naturally collect:\n1. Guest name\n2. Reservation date\n3. Time (if missing, ask \u201cWhat time works for you?\u201d)\n4. Number of guests\n5. Phone number\n6. Special requests (ask only once)\n\nAfter collecting all details:\n- Simply acknowledge politely.\n- DO NOT call any tools.\n- DO NOT say the reservation is confirmed.\n- DO NOT say it's stored.\nThe backend will save the reservation after the call ends.\n\n\nEXECUTION RULES:\n- Maintain a natural conversation.\n- Ask only the necessary questions.\n- Never call any function or tool.\n- Never output JSON.\n- Never say \u201cI am processing your reservation\u201d.\n- End politely once all details are collected.\n",
+        "temperature": 0.5,
+        "provider": "openai"
+      },
+      "voice": {
+        "provider": "vapi",
+        "voiceId": "Paige"
+      },
+      "firstMessage": "Hi, thanks for calling Bluewave Ramen Bar. How can I help you?"
+    }
+  }
+}

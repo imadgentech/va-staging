@@ -13,8 +13,10 @@ from datetime import datetime
 from fastapi import FastAPI, Request
 from fastapi import HTTPException
 from pydantic import BaseModel
-from backend.core.users_airtable import UsersAirtable
-from backend.core.airtable_client import AirtableManager
+from backend.core.users_postgres import UsersPostgres
+from backend.core.postgres_client import PostgresManager
+from backend.core.models import Base
+from backend.core.database import engine
 from backend.core.prompts import build_system_prompt
 from backend.core.reservation_mapper import router as reservation_mapper_router
 from backend.core.pending_saver import add_pending_reservation
@@ -36,12 +38,16 @@ logger = logging.getLogger("Server")
 
 app.include_router(reservation_mapper_router, prefix="")
 
+# Startup DB
+if engine:
+    Base.metadata.create_all(bind=engine)
+
 try:
-    airtable = AirtableManager()
-    logger.info("✅ Airtable connection established")
+    db_client = PostgresManager()
+    logger.info("✅ Postgres connection established")
 except Exception as e:
-    logger.error(f"❌ Airtable init failed: {e}")
-    airtable = None
+    logger.error(f"❌ Postgres init failed: {e}")
+    db_client = None
 
 app.add_middleware(
     CORSMiddleware,
@@ -78,15 +84,15 @@ class SignupPayload(BaseModel):
     password: str
 
 try:
-    users_airtable = UsersAirtable()
-    logger.info("✅ Users Airtable ready")
+    users_db = UsersPostgres()
+    logger.info("✅ Users DB ready")
 except Exception as e:
-    logger.error(f"❌ Users Airtable init failed: {e}")
-    users_airtable = None
+    logger.error(f"❌ Users DB init failed: {e}")
+    users_db = None
 
 @app.post("/signup")
 def signup_user(payload: SignupPayload):
-    if not users_airtable:
+    if not users_db:
         raise HTTPException(status_code=500, detail="Users DB unavailable")
 
     try:
@@ -97,7 +103,7 @@ def signup_user(payload: SignupPayload):
         raw_password = data.pop("password")
         data["password"] = hash_password(raw_password)
 
-        users_airtable.create_user(data)
+        users_db.create_user(data)
         return {"status": "ok"}
     except Exception as e:
         logger.exception("❌ Signup failed")
@@ -116,7 +122,7 @@ def login(payload: LoginPayload):
     password = payload.password.strip()
 
     # 1. Fetch User
-    user = users_airtable.get_user_by_email(email)
+    user = users_db.get_user_by_email(email)
     if not user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
@@ -142,15 +148,15 @@ def login(payload: LoginPayload):
 
 @app.get("/dashboard/call-logs/{restaurant_id}")
 def get_call_logs_for_dashboard(restaurant_id: str):
-    if not airtable:
-        raise HTTPException(status_code=500, detail="Airtable not available")
+    if not db_client:
+        raise HTTPException(status_code=500, detail="DB not available")
 
     # 🔒 Ensure restaurant actually exists
-    restaurant = airtable.get_restaurant_by_id(restaurant_id)
+    restaurant = db_client.get_restaurant_by_id(restaurant_id)
     if not restaurant:
         raise HTTPException(status_code=404, detail="Restaurant not found")
 
-    logs = airtable.get_call_logs_by_restaurant(restaurant_id)
+    logs = db_client.get_call_logs_by_restaurant(restaurant_id)
 
     # Normalize response for frontend
     return {
@@ -171,7 +177,7 @@ def get_call_logs_for_dashboard(restaurant_id: str):
 
 @app.get("/dashboard/stats/{restaurant_id}")
 def get_dashboard_stats(restaurant_id: str):
-    records = airtable.get_call_logs_by_restaurant(restaurant_id)
+    records = db_client.get_call_logs_by_restaurant(restaurant_id)
 
     total_calls = len(records)
 

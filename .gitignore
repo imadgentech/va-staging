@@ -1,8 +1,8 @@
-.env
 venv/
 __pycache__/
 *.pyc
-server.log
-last_vapi_request.json
-pending_reservations.json
+.env
+.DS_Store
 ngrok.exe
+server.log
+.gcloudignore
