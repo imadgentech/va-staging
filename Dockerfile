@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Default port for Cloud Run is 8080
-ENV PORT=8080
+# Default port for Cloud Run (updated to 8090 for local compatibility)
+ENV PORT=8090
 
 CMD ["sh", "-c", "uvicorn backend.server:app --host 0.0.0.0 --port ${PORT}"]
