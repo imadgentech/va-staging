@@ -1,11 +1,11 @@
 import logging
 from datetime import datetime
-from backend.core.airtable_client import AirtableManager
+from backend.core.postgres_client import PostgresManager
 
 logger = logging.getLogger("PendingSaver")
 
-# Initialize Airtable once
-airtable = AirtableManager()
+# Initialize Postgres once
+db = PostgresManager()
 
 
 # ----------------------------------------------------
@@ -36,13 +36,13 @@ def _validate_reservation(res: dict) -> bool:
 
 def add_pending_reservation(cleaned_reservation: dict) -> bool:
     """
-    Save a pending reservation directly to Airtable.
+    Save a pending reservation directly to Postgres.
     """
     if not _validate_reservation(cleaned_reservation):
         return False
 
     try:
-        # Prepare record, filtering out None or empty strings to satisfy Airtable validation
+        # Prepare record
         raw_record = {
             "restaurant_id": cleaned_reservation.get("restaurant_id"),
             "guest_name": cleaned_reservation.get("guest_name"),
@@ -54,50 +54,40 @@ def add_pending_reservation(cleaned_reservation: dict) -> bool:
             "source": "vapi",
             "status": "pending",
         }
-        # Only keep keys with truthy values (or explicitly 0/False if needed, though mostly strings here)
-        # Note: 'guests' is int, so we should keep it even if 0 if that were possible, but it's usually >0.
-        # Ideally, we just remove keys that are empty strings if they are meant to be dates/selects.
+        # Filter None values if needed, though Postgres JSONB can handle them or we can store as is.
+        # But for consistency with previous logic which removed empty strings:
         record = {k: v for k, v in raw_record.items() if v not in [None, ""]}
 
-        airtable.create_pending_reservation(record)
+        db.create_pending_reservation(record)
 
         # ----------------------------------------------------
         # 🟢 AUTO-CONFIRM (Dual Write)
-        # The user requested that data "transfer" to Reservations.
-        # Since we don't have a manual review step, we write to BOTH.
         # ----------------------------------------------------
         if _validate_reservation(cleaned_reservation):
-            # Use the SAME filtered record (minus status, which create_reservation sets to 'Confirmed' anyway)
-            # Actually create_reservation builds its own dict, so we must be careful.
-            # Let's pass the cleaned_reservation but we know create_reservation in airtable_client
-            # might not filter empty strings.
-            # Ideally, we should update airtable_client to filter, OR pass a filtered dict here.
-
-            # HACK: airtable_client.create_reservation REBUILDS the dict from input.
-            # We should pass the FILTERED 'record' to it, and ensure airtable_client uses get() safely.
-            # But 'record' has keys like 'restaurant_id', 'guest_name' etc. which matches what create_reservation expects.
-            
-            airtable.create_reservation(
+             # create_reservation in PostgresManager expects (restaurant_id, data)
+             # passed 'record' has 'restaurant_id' but create_reservation might expect it separate or in data.
+             # checking postgres_client.py: create_reservation(self, restaurant_id: str, data: dict)
+             
+            db.create_reservation(
                 record.get("restaurant_id"),
                 record # Pass the CLEANED dict
             )
             logger.info("✅ Reservation auto-confirmed and saved to main table")
 
-        logger.info("✅ Pending reservation saved to Airtable")
+        logger.info("✅ Pending reservation saved to Postgres")
         return True
 
     except Exception as e:
-        logger.exception("❌ Failed to save pending reservation to Airtable")
+        logger.exception("❌ Failed to save pending reservation to Postgres")
         return False
 
 
 def get_pending_reservations():
     """
-    Fetch all pending reservations from Airtable.
-    (Optional — used by micro-agents if needed)
+    Fetch all pending reservations from Postgres.
     """
     try:
-        return airtable.get_pending_reservations()
+        return db.get_pending_reservations()
     except Exception:
         logger.exception("❌ Failed to fetch pending reservations")
         return []
@@ -108,12 +98,13 @@ def pop_next_reservation():
     Fetch + delete the oldest pending reservation.
     """
     try:
-        record = airtable.get_oldest_pending_reservation()
+        # get_oldest_pending_reservation returns dict with "id" and "fields"
+        record = db.get_oldest_pending_reservation()
 
         if not record:
             return None
 
-        airtable.delete_pending_reservation(record["id"])
+        db.delete_pending_reservation(record["id"])
         return record["fields"]
 
     except Exception:
@@ -126,7 +117,7 @@ def clear_all():
     Clear all pending reservations.
     """
     try:
-        airtable.clear_pending_reservations()
+        db.clear_pending_reservations()
         return True
     except Exception:
         logger.exception("❌ Failed to clear pending reservations")

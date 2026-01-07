@@ -4,10 +4,18 @@ from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
 from backend.core.models import Base
 
-# Hardcoded for verification
-# User provided: 34.131.176.248, n8n-user, h&qh5nW<
-# Encoding: & -> %26, < -> %3C
-DB_URL = "postgresql://n8n-user:h%26qh5nW%3C@34.131.176.248:5432/test"
+# Get DB URL from env
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASS = os.getenv("DB_PASS", "password")
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_NAME = os.getenv("DB_NAME", "test")
+
+DB_URL = os.getenv("DATABASE_URL")
+if not DB_URL:
+    import urllib.parse
+    encoded_pass = urllib.parse.quote_plus(DB_PASS)
+    DB_URL = f"postgresql://{DB_USER}:{encoded_pass}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
 def verify():
     print(f"Connecting to {DB_URL.split('@')[1]}...")

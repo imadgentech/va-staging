@@ -9,3 +9,5 @@ dash
 dash-bootstrap-components
 plotly
 python-jose
+fastapi
+uvicorn

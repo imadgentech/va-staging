@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from backend.core.pending_saver import pop_next_reservation
-from backend.core.airtable_client import AirtableManager
+from backend.core.postgres_client import PostgresManager
 from backend.core.reservation_mapper import normalize_reservation_data
 
 logger = logging.getLogger("BackgroundSaver")
@@ -16,13 +16,13 @@ logger.setLevel(logging.INFO)
 # PROCESS SINGLE JOB
 # ----------------------------------------------------
 
-def process_job(job: dict, airtable: AirtableManager):
+def process_job(job: dict, db: PostgresManager):
     """
-    Processes a single reservation job and saves it to Airtable.
+    Processes a single reservation job and saves it to Postgres.
 
     job example:
     {
-        "restaurant_id": "recXXXX",   # optional
+        "restaurant_id": "recXXXX",   # optional (integer ID in postgres)
         "guest_name": "...",
         "guest_phone": "...",
         "date": "...",
@@ -38,7 +38,7 @@ def process_job(job: dict, airtable: AirtableManager):
     normalized = normalize_reservation_data(job)
     logger.info(f"🔄 Normalized payload: {normalized}")
 
-    airtable_payload = {
+    postgres_payload = {
         "guest_name": normalized["guest_name"],
         "guest_phone": normalized["guest_phone"],
         "date": normalized["date"],
@@ -48,17 +48,17 @@ def process_job(job: dict, airtable: AirtableManager):
         "status": "Confirmed",
     }
 
-    logger.info(f"📤 Saving reservation to Airtable: {airtable_payload}")
+    logger.info(f"📤 Saving reservation to Postgres: {postgres_payload}")
 
-    success = airtable.create_reservation(
+    success = db.create_reservation(
         restaurant_id=restaurant_id,
-        data=airtable_payload
+        data=postgres_payload
     )
 
     if not success:
-        raise Exception("Airtable create_reservation() returned False")
+        raise Exception("Postgres create_reservation() returned False")
 
-    logger.info("✅ Reservation successfully saved to Airtable")
+    logger.info("✅ Reservation successfully saved to Postgres")
 
 
 # ----------------------------------------------------
@@ -68,10 +68,10 @@ def process_job(job: dict, airtable: AirtableManager):
 def run_background_saver():
     """
     Continuously pulls jobs from the pending queue
-    and saves them to Airtable.
+    and saves them to Postgres.
     """
 
-    airtable = AirtableManager()
+    db = PostgresManager()
     logger.info("🚀 Background Saver started — listening for pending reservations...")
 
     while True:
@@ -82,7 +82,7 @@ def run_background_saver():
             continue
 
         try:
-            process_job(job, airtable)
+            process_job(job, db)
         except Exception as e:
             logger.error(f"❌ Failed processing job, will retry later: {e}")
             # NOTE: job is already removed from queue

@@ -1,0 +1,17 @@
+venv
+__pycache__
+*.pyc
+*.log
+.git
+.gitignore
+.env
+local_db
+*.exe
+ngrok.exe
+server.log
+last_vapi_request.json
+pending_reservations.json
+deploy.ps1
+README.md
+TECHNICAL_DOC.md
+frontend-react
