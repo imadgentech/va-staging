@@ -12,7 +12,10 @@ param(
 $start = Get-Date
 Write-Host "🚀 Starting deployment to Cloud Run..." -ForegroundColor Cyan
 
-# 1. Build
+# 1. Prepare Password
+$plainPass = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($DbPassword))
+
+# 2. Build
 Write-Host "📦 Building container image..." -ForegroundColor Yellow
 gcloud builds submit --tag gcr.io/$ProjectId/va-backend .
 
@@ -28,7 +31,7 @@ gcloud run deploy va-backend `
     --platform managed `
     --region us-central1 `
     --allow-unauthenticated `
-    --set-env-vars="DATABASE_URL=postgresql://n8n-user:${DbPassword}@34.131.176.248:5432/test" `
+    --set-env-vars="DATABASE_URL=postgresql://n8n-user:${plainPass}@34.131.176.248:5432/test" `
     --set-env-vars="JWT_SECRET=production_secret_change_me"
 
 if ($LASTEXITCODE -ne 0) {

@@ -38,15 +38,24 @@ logger = logging.getLogger("Server")
 
 app.include_router(reservation_mapper_router, prefix="")
 
-# Startup DB
-if engine:
-    Base.metadata.create_all(bind=engine)
+# ---------------------------------------------------------
+# STARTUP
+# ---------------------------------------------------------
+@app.on_event("startup")
+def on_startup():
+    """Ensure tables exist on startup without blocking imports."""
+    if engine:
+        try:
+            Base.metadata.create_all(bind=engine)
+            logger.info("✅ Database tables verified/created")
+        except Exception as e:
+            logger.error(f"❌ Database initialization failed: {e}")
 
 try:
     db_client = PostgresManager()
-    logger.info("✅ Postgres connection established")
+    logger.info("✅ Postgres manager initialized")
 except Exception as e:
-    logger.error(f"❌ Postgres init failed: {e}")
+    logger.error(f"❌ Postgres manager init failed: {e}")
     db_client = None
 
 app.add_middleware(
@@ -68,9 +77,91 @@ def hash_password(password: str) -> str:
 def create_access_token(data: dict):
     return jwt.encode(data, JWT_SECRET, algorithm=JWT_ALGO)
 
-# ... (Existing helper functions like extract_dialed_number, resolve_restaurant kept above or below correctly) ...
-# To minimize diff noise, I will keep helper functions in their existing blocks if possible, 
-# but I need to replace the EMAIL section and OTP endpoints.
+# ---------------------------------------------------------
+# HELPERS
+# ---------------------------------------------------------
+
+def extract_dialed_number(payload: dict) -> str:
+    """Extract the specific virtual number that was dialed."""
+    try:
+        call = payload.get("message", {}).get("call", {})
+        return call.get("phoneNumber", {}).get("number", "")
+    except:
+        return ""
+
+def resolve_restaurant(dialed_number: str):
+    """Find restaurant record matching the dialed virtual number."""
+    if not db_client or not dialed_number:
+         return None
+    return db_client.get_restaurant_by_phone(dialed_number)
+
+# ---------------------------------------------------------
+# VAPI INBOUND (Core Webhook)
+# ---------------------------------------------------------
+@app.post("/inbound")
+async def handle_inbound(request: Request):
+    payload = await request.json()
+    msg_type = payload.get("message", {}).get("type")
+
+    # 1. Provide dynamic prompt to Vapi at call start
+    if msg_type == "assistant-request":
+        logger.info("📞 Receiving Assistant Request...")
+        dialed = extract_dialed_number(payload)
+        restaurant = resolve_restaurant(dialed)
+
+        if not restaurant:
+            logger.warning(f"⚠️ No restaurant found for {dialed}")
+            return {"assistant": {"model": {"messages": [{"role": "system", "content": "Welcome. We are currently closed."}]}}}
+
+        # Build prompt using custom logic
+        prompt = build_system_prompt(restaurant.get("fields", {}))
+        return {
+            "assistant": {
+                "model": {
+                    "messages": [{"role": "system", "content": prompt}]
+                }
+            }
+        }
+
+    # 2. Process call results when finished
+    if msg_type == "end-of-call-report":
+        logger.info("📥 End of Call Report received")
+        try:
+            # Save for debugging
+            with open("last_vapi_request.json", "w") as f:
+                json.dump(payload, f, indent=2)
+
+            transcript = payload.get("message", {}).get("artifact", {}).get("transcript", "")
+            dialed = extract_dialed_number(payload)
+            restaurant = resolve_restaurant(dialed)
+            restaurant_id = restaurant.get("fields", {}).get("restaurant_id") if restaurant else None
+
+            # Extract details
+            res_data = extract_reservation_from_transcript(transcript, restaurant_id)
+            
+            # Log the call
+            if db_client:
+                db_client.log_call({
+                    "restaurant_id": restaurant_id,
+                    "call_id": payload.get("message", {}).get("call", {}).get("id"),
+                    "intent": "ReservationRequest", # Simplified for now
+                    "outcome": "completed",
+                    "agent_summary": payload.get("message", {}).get("analysis", {}).get("summary"),
+                    "recording_url": payload.get("message", {}).get("artifact", {}).get("recordingUrl"),
+                })
+                
+                # Save pending reservation if extraction looks valid
+                if res_data.get("guest_name"):
+                    add_pending_reservation(res_data)
+            
+            return {"status": "processed"}
+        except Exception as e:
+            logger.exception("❌ Failed to process end-of-call-report")
+            return {"status": "error", "error": str(e)}
+
+    # Ignore other noise
+    logger.info(f"⏭️ Ignoring message type: {msg_type}")
+    return {"status": "ignored"}
 
 # ---------------------------------------------------------
 # SIGNUP

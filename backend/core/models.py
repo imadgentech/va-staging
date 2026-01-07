@@ -28,6 +28,13 @@ class Restaurant(Base):
     id = Column(Integer, primary_key=True, index=True) # Auto-increment integer
     name = Column(String, nullable=False)
     phone_number = Column(String, unique=True, index=True)
+    business_type = Column(String, default="restaurant")
+    address = Column(String)
+    reservation_rules = Column(Text)
+    policies = Column(Text)
+    script = Column(Text)
+    description = Column(Text)
+    kb = Column(Text)
     owner_id = Column(String, ForeignKey("users.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 

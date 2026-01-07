@@ -29,7 +29,8 @@ if not SQLALCHEMY_DATABASE_URL:
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 
     # pool_pre_ping=True checks for stale connections
-    pool_pre_ping=True
+    pool_pre_ping=True,
+    connect_args={'connect_timeout': 5} # Fast fail if DB unreachable
 ) if SQLALCHEMY_DATABASE_URL else None
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
