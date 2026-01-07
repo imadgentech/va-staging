@@ -38,6 +38,10 @@ logger = logging.getLogger("Server")
 
 app.include_router(reservation_mapper_router, prefix="")
 
+@app.get("/")
+def read_root():
+    return {"status": "ok", "service": "Voice Orchestrator"}
+
 # ---------------------------------------------------------
 # STARTUP
 # ---------------------------------------------------------

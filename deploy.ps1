@@ -31,6 +31,7 @@ gcloud run deploy va-backend `
     --platform managed `
     --region us-central1 `
     --allow-unauthenticated `
+    --port 8090 `
     --set-env-vars="DATABASE_URL=postgresql://n8n-user:${plainPass}@34.131.176.248:5432/test" `
     --set-env-vars="JWT_SECRET=production_secret_change_me"
 

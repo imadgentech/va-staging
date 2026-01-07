@@ -14,7 +14,7 @@ You must configure the following environment variables in your Cloud Run service
 | `DB_PASS` | Database Password |
 | `DB_NAME` | Database Name |
 | `DB_PORT` | Database Port (default 5432) |
-| `PORT` | The port the container listens on (default 8090) |
+| `PORT` | The port the container listens on (configured to 8090) |
 | `JWT_SECRET` | Secret key for JWT tokens |
 
 ## 2. Building the Image
