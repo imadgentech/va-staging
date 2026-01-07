@@ -16,12 +16,16 @@ if not SQLALCHEMY_DATABASE_URL:
     db_name = os.getenv("DB_NAME", "test")
 
     if db_user and db_pass and db_host:
-         # Handle URL encoding for password if needed, usually recommended
-         # but strict quoting might be needed. 
-         # For simple usage:
          import urllib.parse
          encoded_pass = urllib.parse.quote_plus(db_pass)
-         SQLALCHEMY_DATABASE_URL = f"postgresql://{db_user}:{encoded_pass}@{db_host}:{db_port}/{db_name}"
+         
+         if db_host.startswith("/"):
+             # Unix socket (Cloud SQL)
+             # Format: postgresql://user:pass@/dbname?host=/path/to/socket/dir
+             SQLALCHEMY_DATABASE_URL = f"postgresql://{db_user}:{encoded_pass}@/{db_name}?host={db_host}"
+         else:
+             # Standard TCP
+             SQLALCHEMY_DATABASE_URL = f"postgresql://{db_user}:{encoded_pass}@{db_host}:{db_port}/{db_name}"
     else:
          # Fallback or leave None to fail later
          pass
